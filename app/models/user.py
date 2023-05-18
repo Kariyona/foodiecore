@@ -14,6 +14,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    #user can have multiple listings associated with them
+    listings = db.relationship('Listing', back_populates='user')
+    #user can have multiple reviews associated with them
+    reviews = db.relationship('Review', back_populates='user')
+
     @property
     def password(self):
         return self.hashed_password
@@ -29,5 +34,5 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
         }
