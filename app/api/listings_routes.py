@@ -34,6 +34,8 @@ def get_listing(listingId):
 @listings_routes.route('/new', methods=["POST"])
 @login_required
 def create_listing():
+    user_id = current_user.id
+    # Creates instance of ListingForm class
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -43,3 +45,20 @@ def create_listing():
         db.session.add(listing)
         db.session.commit()
         return listing.to_dict()
+
+#Delete listing by id
+@listings_routes.route('/<int:listingId>/', methods=['DELETE'])
+@login_required
+def delete_listing(listingId):
+    listing = Listing.query.get(listingId)
+
+    if not listing:
+        return {'errors': ['Listing does not exist']}, 404
+
+    # Check if listing belongs to user
+    if listing.user_id == current_user.id:
+        db.session.delete(listing)
+        db.session.commit()
+        return {'message': 'Successfully deleted!'}
+    else:
+        return {'errors': ['Unauthorized']}, 401
