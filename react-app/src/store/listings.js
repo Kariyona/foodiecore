@@ -1,7 +1,8 @@
 // action constants
 export const GET_LISTINGS = "listings/GET_LISTINGS";
 export const GET_LISTING = "listings/GET_LISTING";
-export const DELETE_LISTING = "listings/DELETE_LISTING"
+export const DELETE_LISTING = "listings/DELETE_LISTING";
+export const CREATE_LISTING = "listings/CREATE_LISTING";
 
 // ACTION CREATORS
 export const getListings = (listings) => ({
@@ -17,6 +18,11 @@ export const getListing = (listing) => ({
 export const deleteListing = (listingId) => ({
     type: DELETE_LISTING,
     payload: listingId
+})
+
+export const createListing = (listing) => ({
+    type: CREATE_LISTING,
+    payload: listing
 })
 
 
@@ -59,6 +65,25 @@ export const deleteListingById = (listingId) => async (dispatch) => {
     }
 }
 
+/********************* create a listing *********************/
+export const createNewListing = (listing) => async (dispatch) => {
+    const response = await fetch(`/api/listings/new`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(listing)
+    });
+    if (!response.ok) {
+        const errors = await response.json();
+        return errors;
+    } else {
+        const listing = await response.json()
+        dispatch(createListing(listing))
+        return listing
+    }
+}
+
 // REDUCERS
 const initialState = {  allListings: {}, listing: {} };
 
@@ -78,6 +103,12 @@ export default function reducer(state = initialState, action) {
             const newState = { ...state };
             delete newState.allListings[action.payload]
             return newState
+        }
+        case CREATE_LISTING: {
+            const newState = { ...state };
+            // Use new listings ID as the key to add new listing into all listings obj
+            newState.allListings[action.payload.id] = action.payload;
+            return newState;
         }
         default:
             return state;

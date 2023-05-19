@@ -45,6 +45,8 @@ def create_listing():
         db.session.add(listing)
         db.session.commit()
         return listing.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #Delete listing by id
 @listings_routes.route('/<int:listingId>/', methods=['DELETE'])
@@ -60,5 +62,26 @@ def delete_listing(listingId):
         db.session.delete(listing)
         db.session.commit()
         return {'message': 'Successfully deleted!'}
+    else:
+        return {'errors': ['Unauthorized']}, 401
+
+#Edit listing by id
+@listings_routes.route('/<int:listingId>/edit', methods=['PUT'])
+@login_required
+def update_listing(listingId):
+    listing = Listing.query.get(listingId)
+
+    if not listing:
+        return {'errors': ['Listing does not exist']}, 404
+
+    if listing.user_id == current_user.id:
+        form = ListingForm(form_data=listing)
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            form.populate_obj(listing)
+            db.session.commit()
+            return listing.to_dict()
+        else:
+            return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     else:
         return {'errors': ['Unauthorized']}, 401
