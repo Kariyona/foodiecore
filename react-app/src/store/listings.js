@@ -3,6 +3,7 @@ export const GET_LISTINGS = "listings/GET_LISTINGS";
 export const GET_LISTING = "listings/GET_LISTING";
 export const DELETE_LISTING = "listings/DELETE_LISTING";
 export const CREATE_LISTING = "listings/CREATE_LISTING";
+export const UPDATE_LISTING = "listings/UPDATE_LISTING";
 
 // ACTION CREATORS
 export const getListings = (listings) => ({
@@ -25,6 +26,11 @@ export const createListing = (listing) => ({
     payload: listing
 })
 
+export const updateListing = (listing) => ({
+    type: UPDATE_LISTING,
+    payload: listing
+})
+
 
 // THUNKS - START
 /********************* retrieve all listings *********************/
@@ -40,7 +46,8 @@ export const getAllListings = () => async (dispatch) => {
     }
 }
 
-/********************* retrieve one listing *********************/export const getListingById = (listingId) => async (dispatch) => {
+/********************* retrieve one listing *********************/
+export const getListingById = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/listings/${listingId}`);
     if (!response.ok) {
         const errors = await response.json();
@@ -84,20 +91,40 @@ export const createNewListing = (listing) => async (dispatch) => {
     }
 }
 
+/********************* update a listing *********************/
+export const editListing = (listing, listingId) => async(dispatch) => {
+    const response = await fetch(`/api/listings/${listingId}/edit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(listing)
+    });
+    if (!response.ok) {
+        const errors = await response.json()
+        return errors;
+    } else {
+        const listing = await response.json();
+        dispatch(updateListing(listing))
+        return listing;
+    }
+}
+
+
 // REDUCERS
 const initialState = {  allListings: {}, listing: {} };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_LISTINGS: {
-            // const newState = { ...state, listings: action.payload };
-            // return newState
-            return { ...state, allListings: action.payload};
+            const newState = { ...state, listings: action.payload };
+            return newState
+            // return { ...state, allListings: action.payload};
         }
         case GET_LISTING: {
-            // const newState = { ...state, listing: action.payload };
-            // return newState
-            return { ...state, listing: action.payload};
+            const newState = { ...state, listing: action.payload };
+            return newState
+            // return { ...state, listing: action.payload};
         }
         case DELETE_LISTING: {
             const newState = { ...state };
@@ -109,6 +136,10 @@ export default function reducer(state = initialState, action) {
             // Use new listings ID as the key to add new listing into all listings obj
             newState.allListings[action.payload.id] = action.payload;
             return newState;
+        }
+        case UPDATE_LISTING: {
+            // Contains the updated listing data from the action
+            return { ...state, [action.payload.id]: action.payload }
         }
         default:
             return state;

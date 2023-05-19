@@ -8,6 +8,8 @@ import Navigation from "./components/Navigation";
 import Listings from './components/Listings/index';
 import ListingDetails from './components/Listings/ListingDetails'
 import Listing from "./components/Listings/index";
+import CreateListingForm from "./components/Listings/CreateListingForm"
+import UpdateListingForm from "./components/Listings/UpdateListingForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,8 +29,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/listings/new">
+            <CreateListingForm />
+          </Route>
           <Route path="/listings" exact={true}>
             <Listing />
+          </Route>
+          <Route path="/listings/:listingId/edit">
+            <UpdateListingForm />
           </Route>
           <Route path="/listings/:listingId">
             <ListingDetails />

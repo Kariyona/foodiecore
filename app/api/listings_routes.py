@@ -73,15 +73,18 @@ def update_listing(listingId):
 
     if not listing:
         return {'errors': ['Listing does not exist']}, 404
-
-    if listing.user_id == current_user.id:
-        form = ListingForm(form_data=listing)
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-            form.populate_obj(listing)
-            db.session.commit()
-            return listing.to_dict()
-        else:
-            return {'errors': validation_errors_to_error_messages(form.errors)}, 400
-    else:
+    if (listing.user_id != current_user.id):
         return {'errors': ['Unauthorized']}, 401
+
+    form = ListingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        form.populate_obj(listing)
+
+        db.session.commit()
+        return listing.to_dict()
+    else:
+
+        form.title.data = listing.title
+
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
