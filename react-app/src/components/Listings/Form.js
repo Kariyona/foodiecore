@@ -46,20 +46,17 @@ const Form = ({ listing, type }) => {
   }, [title, address, city, state, country, hours, description, image_url]);
 
   useEffect(() => {
-    const loaddata = async () => {
         if (listing) {
-            setTitle(listing.title);
-            setAddress(listing.address);
-            setCity(listing.city);
-            setState(listing.state);
-            setCountry(listing.country);
-            setHours(listing.hours);
-            setDescription(listing.description);
-            setImageUrl(listing.image_url);
+            setTitle(listing?.title || "");
+            setAddress(listing?.address || "");
+            setCity(listing?.city || "");
+            setState(listing?.state || "");
+            setCountry(listing?.country || "");
+            setHours(listing?.hours || "");
+            setDescription(listing?.description || "");
+            setImageUrl(listing?.image_url || "");
             setIsLoaded(true);
           }
-    }
-    loaddata()
   }, [listing]);
 
   const handleSubmit = async (e) => {

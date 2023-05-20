@@ -22,8 +22,7 @@ const UpdateListingForm = () => {
     dispatch(getListingById(listingId))
   }, [dispatch])
   // console.log("whaaaat is listing? ", listing)
-  if (!listing) return <></>
-  
+
   return (
     <Form listing={listing} type="UpdateListingForm" />
   )

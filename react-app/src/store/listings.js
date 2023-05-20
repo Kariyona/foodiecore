@@ -117,7 +117,7 @@ const initialState = {  allListings: {}, listing: {} };
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_LISTINGS: {
-            const newState = { ...state, listings: action.payload };
+            const newState = { ...state, allListings: action.payload };
             return newState
             // return { ...state, allListings: action.payload};
         }

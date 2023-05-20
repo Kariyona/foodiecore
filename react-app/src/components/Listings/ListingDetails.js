@@ -7,17 +7,20 @@ const ListingDetails = () => {
     let dispatch = useDispatch();
     const { listingId } = useParams();
     const listing = useSelector((state) => state.listings.listing)
-    console.log("lalalallalallistings: ", listing)
 
     useEffect(() => {
         dispatch(getListingById(listingId));
     }, [dispatch, listingId])
 
     return (
-        <div>
+        <div className="listing-card-details">
             {listing && (
                 <>
                 <h1>{listing.title}</h1>
+                <img src={listing.image_url} id="listing-image" />
+                <p>Business hours: {listing.hours}pm</p>
+                <p>{listing.description}</p>
+                <button>Edit</button>
                 </>
             )}
         </div>
