@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 
 const ListingIndexItem = ({ listing }) => {
   const history = useHistory();
   const [expanded, setExpanded] = useState(false);
+  const buttonRef = useRef(null)
 
   const handleListingDetailsClick = () => {
       history.push(`/listings/${listing.id}`)
@@ -12,6 +13,19 @@ const ListingIndexItem = ({ listing }) => {
   const handleReadMoreClick = () => {
     setExpanded(!expanded)
   }
+
+  const handleClickOutside = (e) => {
+    if (buttonRef.current && !buttonRef.current.contains(e.target)) {
+      setExpanded(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
   return (
     <div className="listing-container">
@@ -26,12 +40,12 @@ const ListingIndexItem = ({ listing }) => {
               {listing.description}
             </p>
             {expanded ? (
-              <button className="read-more-button" onClick={handleReadMoreClick}>
-               ^ Close
+              <button ref={buttonRef} className="read-more-button" onClick={handleReadMoreClick}>
+               {`<< Close`}
               </button>
             ) : (
-              <button className="read-more-button" onClick={handleReadMoreClick}>
-                ...Read more
+              <button ref={buttonRef} className="read-more-button" onClick={handleReadMoreClick}>
+                {`...Read more >>`}
               </button>
             )}
       </div>

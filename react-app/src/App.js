@@ -10,6 +10,7 @@ import ListingDetails from './components/Listings/ListingDetails'
 import Listing from "./components/Listings/index";
 import CreateListingForm from "./components/Listings/CreateListingForm"
 import UpdateListingForm from "./components/Listings/UpdateListingForm";
+import Sidebar from "./components/Navigation/Sidebar";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <Sidebar />
       {isLoaded && (
         <Switch>
           <Route path="/login" >

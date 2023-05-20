@@ -60,6 +60,7 @@ body {
   grid-gap: 5px;
   /* width: 80%; */
   margin-top: 5%;
+
 }
 
 body {
@@ -91,6 +92,19 @@ body {
     width: 450px;
 }
 
-.first-card-text i {
+/* .first-card-text i {
     font-size: 50pt;
+} */
+
+.index-container {
+    position: relative;
+    width: 100%;
+    /* overflow: hidden; */
+}
+
+.first-card-text h1 {
+  text-align: right;
+  font-style: italic;
+  margin-right: 5px;
+  margin-top: 50px;
 }

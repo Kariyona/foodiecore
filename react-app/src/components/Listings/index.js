@@ -3,6 +3,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllListings } from "../../store/listings";
 import ListingIndexItem from "./ListingIndexItem";
 import "./Listings.css";
+import Slider from "react-slick";
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        // display: "block",
+        background: "lightpink",
+        margin: "50px",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        // display: "block",
+        background: "lightpink",
+        margin: "50px",
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
 function Listing() {
   const dispatch = useDispatch();
@@ -15,19 +48,57 @@ function Listing() {
 
   const listings = storeListings.allListings;
 
-  return (
-    <div className="page-container">
-      <div className="listings-container">
-        <div className="first-card-text">
-          <h1>Check out these delicious food spots!</h1>
-          <i class="fa-solid fa-arrow-right"></i>
-        </div>
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 400,
+    draggable: true,
+    centerMode: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    accessibility: true,
+    focusOnSelect: true,
+    easing: "linear",
+    centerMode: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    prevArrow: <NextArrow />,
+    nextArrow: <PrevArrow />,
+    initialSlide: 5,
+    pauseOnHover: true,
+  };
 
-        {Object.values(listings).map((listing) => (
-          <ListingIndexItem key={listing.id} listing={listing} />
-        ))}
+  return (
+    // <div className="page-container">
+    //   <div className="listings-container">
+    //     <div className="first-card-text">
+    //       <h1>Check out these delicious food spots!</h1>
+    //       <i class="fa-solid fa-arrow-right"></i>
+    //     </div>
+    //     <Slider {...settings}>
+    //       {Object.values(listings).map((listing) => (
+    //         <ListingIndexItem key={listing.id} listing={listing} />
+    //       ))}
+    //     </Slider>
+    //   </div>
+    // </div>
+    <>
+    <div className="index-container">
+      <div className="first-card-text">
+        <h1>Check out these delicious food spots!</h1>
+        {/* <i class="fa-solid fa-arrow-right"></i> */}
       </div>
-    </div>
+
+      <Slider {...settings}>
+        {Object.values(listings).map((listing) => (
+          <div className="carousel-item" key={listing.id}>
+            <ListingIndexItem key={listing.id} listing={listing} />
+          </div>
+        ))}
+      </Slider>
+      </div>
+    </>
   );
 }
 

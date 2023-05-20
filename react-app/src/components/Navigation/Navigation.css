@@ -1,7 +1,61 @@
 .profile-dropdown {
   position: absolute;
+  top: 5px;
+  right: 80px;
+  border: 1px solid black;
+  padding: 15px;
+  padding-left: 10px;
+  width: 150px;
+  cursor: pointer;
 }
 
 .hidden {
   display: none;
+}
+
+
+.group-links {
+  display: flex;
+  align-items: center;
+}
+
+#home {
+  font-family: "Gloock", serif;
+  font-size: 50pt;
+  text-decoration: none;
+  color: skyblue;
+  margin-left: 15px;
+}
+
+.navigation-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-new-listing {
+  margin-right: 25px;
+  border: solid white 1px;
+  background-color: lightslategrey;
+  color: white;
+  border-radius: 5px;
+  font-size: 12pt;
+  padding: 4px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.profile-btn {
+  margin-right: 15px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: lightslategray;
+}
+
+
+.profile-button-container {
+  margin-right: 15px;
 }
