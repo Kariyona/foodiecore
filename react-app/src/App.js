@@ -11,6 +11,8 @@ import Listing from "./components/Listings/index";
 import CreateListingForm from "./components/Listings/CreateListingForm"
 import UpdateListingForm from "./components/Listings/UpdateListingForm";
 import Sidebar from "./components/Navigation/Sidebar";
+import UserListings from "./components/Listings/UserListings";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +44,12 @@ function App() {
           </Route>
           <Route path="/listings/:listingId">
             <ListingDetails />
+          </Route>
+          <Route path="/profile/:id/listings">
+            <UserListings />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       )}

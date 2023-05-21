@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "./Sidebar.css";
 
 function Sidebar() {
   const [expanded, setExpanded] = useState(false);
   const sidebarRef = useRef(null);
+  const { id } = useParams()
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
@@ -32,9 +33,6 @@ function Sidebar() {
         <>
           <NavLink exact to="/profile" activeClassName="active" className="sidebar-link">
             Profile
-          </NavLink>
-          <NavLink exact to="/profile/listings" activeClassName="active" className="sidebar-link">
-            My Listings
           </NavLink>
           <NavLink exact to="/bookmarks" activeClassName="active" className="sidebar-link">
             Bookmarks

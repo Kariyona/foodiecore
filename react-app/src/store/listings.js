@@ -4,6 +4,7 @@ export const GET_LISTING = "listings/GET_LISTING";
 export const DELETE_LISTING = "listings/DELETE_LISTING";
 export const CREATE_LISTING = "listings/CREATE_LISTING";
 export const UPDATE_LISTING = "listings/UPDATE_LISTING";
+export const GET_USER_LISTINGS = "listings/GET_USER_LISTINGS";
 
 // ACTION CREATORS
 export const getListings = (listings) => ({
@@ -31,6 +32,10 @@ export const updateListing = (listing) => ({
     payload: listing
 })
 
+export const getListingsByUser = (listings) => ({
+    type: GET_USER_LISTINGS,
+    payload: listings
+})
 
 // THUNKS - START
 /********************* retrieve all listings *********************/
@@ -110,9 +115,25 @@ export const editListing = (listing, listingId) => async(dispatch) => {
     }
 }
 
+/******************* get all of a user's listings *******************/
+export const getListingsByUserId = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/${id}/listings`, {
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+    if (!response.ok) {
+        const errors = await response.json()
+        return errors
+    } else {
+        const listings = await response.json()
+        dispatch(getListingsByUser(listings))
+        return listings;
+    }
+}
 
 // REDUCERS
-const initialState = {  allListings: {}, listing: {} };
+const initialState = {  allListings: {}, listing: {}, userListings: {} };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -140,6 +161,10 @@ export default function reducer(state = initialState, action) {
         case UPDATE_LISTING: {
             // Contains the updated listing data from the action
             return { ...state, [action.payload.id]: action.payload }
+        }
+        case GET_USER_LISTINGS: {
+            const newState = { ...state, userListings: action.payload };
+            return newState;
         }
         default:
             return state;
