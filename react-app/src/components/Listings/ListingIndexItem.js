@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from "react-router-dom";
 
-const ListingIndexItem = ({ listing }) => {
+// Main Template for displaying the listings that belong to a user for homepage and profile
+const ListingIndexItem = ({ listing, hideToggleArea }) => {
   const history = useHistory();
   const [expanded, setExpanded] = useState(false);
   const buttonRef = useRef(null)
@@ -35,17 +36,12 @@ const ListingIndexItem = ({ listing }) => {
 
             <h2>{listing.title}</h2>
             {listing.city}, {listing.state}, {listing.country}
-            <p>Open from {listing.hours}PM</p>
             <p className={`description ${expanded ? 'expanded' : ''}`}>
               {listing.description}
             </p>
-            {expanded ? (
+            {!hideToggleArea && (
               <button ref={buttonRef} className="read-more-button" onClick={handleReadMoreClick}>
-               {`<< Close`}
-              </button>
-            ) : (
-              <button ref={buttonRef} className="read-more-button" onClick={handleReadMoreClick}>
-                {`...Read more >>`}
+               {expanded ? `<< Close` : "...Read more >>"}
               </button>
             )}
       </div>

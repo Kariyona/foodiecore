@@ -1,11 +1,10 @@
-import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import { createNewListing, editListing } from "../../store/listings";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const Form = ({ listing, type }) => {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const { listingId } = useParams();
   const [title, setTitle] = useState(listing.title || "");
@@ -21,11 +20,9 @@ const Form = ({ listing, type }) => {
   const [loaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!listing || !loaded ) return;
+    if (!listing || !loaded) return;
 
     const errors = {};
-    console.log("what is listing? ", listing)
-    console.log("what the frick is title: ", title)
     if (title.length === 0) errors.title = "Title is required";
     if (address.length === 0) errors.address = "Address is required";
     if (city.length === 0) errors.city = "City is required";
@@ -46,32 +43,29 @@ const Form = ({ listing, type }) => {
   }, [title, address, city, state, country, hours, description, image_url]);
 
   useEffect(() => {
-        if (listing) {
-            setTitle(listing?.title || "");
-            setAddress(listing?.address || "");
-            setCity(listing?.city || "");
-            setState(listing?.state || "");
-            setCountry(listing?.country || "");
-            setHours(listing?.hours || "");
-            setDescription(listing?.description || "");
-            setImageUrl(listing?.image_url || "");
-            setIsLoaded(true);
-          }
+    if (listing) {
+      setTitle(listing.title || "");
+      setAddress(listing.address || "");
+      setCity(listing.city || "");
+      setState(listing.state || "");
+      setCountry(listing.country || "");
+      setHours(listing.hours || "");
+      setDescription(listing.description || "");
+      setImageUrl(listing.image_url || "");
+      setIsLoaded(true);
+    }
   }, [listing]);
 
   const handleSubmit = async (e) => {
-    // console.log("handle click submit function running");
     e.preventDefault();
     setIsSubmitted(true);
 
-    const errorArr = Object.values(validationErrors || {});
-    // console.log("this is errors array in handle click: ", errorArr);
+    const errorArr = Object.values(validationErrors || []);
 
     if (errorArr.length > 0) {
-      // console.log("if errors array.lenth === 0 running");
       return;
     } else {
-      const listing = {
+      const updatedListing = {
         title,
         address,
         city,
@@ -81,16 +75,13 @@ const Form = ({ listing, type }) => {
         description,
         image_url,
       };
-      if (type === "CreateListingForm") {
-        const createdListing = await dispatch(createNewListing(listing));
 
-        if (createdListing.id) {
-          history.push(`/listings/${createdListing.id}`);
-        }
-      } else if (type === "UpdateListingForm") {
-        const updatedListing = await dispatch(editListing(listingId, listing));
-        history.push(`/spots/${updatedListing.id}`);
+      if (type === "CreateListingForm") {
+        dispatch(createNewListing(updatedListing));
+      } else {
+        dispatch(editListing(listingId, updatedListing));
       }
+      history.push("/listings");
     }
   };
 
@@ -179,6 +170,9 @@ const Form = ({ listing, type }) => {
             required
           />
         </label>
+        <button type="submit">
+          {type === "CreateListingForm" ? "Create Listing" : "Update Listing"}
+        </button>
       </form>
     </>
   );

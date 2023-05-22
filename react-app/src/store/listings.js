@@ -97,21 +97,21 @@ export const createNewListing = (listing) => async (dispatch) => {
 }
 
 /********************* update a listing *********************/
-export const editListing = (listing, listingId) => async(dispatch) => {
+export const editListing = (listingData, listingId) => async(dispatch) => {
     const response = await fetch(`/api/listings/${listingId}/edit`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(listing)
+        body: JSON.stringify(listingData)
     });
     if (!response.ok) {
         const errors = await response.json()
         return errors;
     } else {
-        const listing = await response.json();
-        dispatch(updateListing(listing))
-        return listing;
+        const updatedListing = await response.json();
+        dispatch(updateListing(updatedListing))
+        return updatedListing;
     }
 }
 

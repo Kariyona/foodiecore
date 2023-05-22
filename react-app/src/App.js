@@ -45,12 +45,14 @@ function App() {
           <Route path="/listings/:listingId">
             <ListingDetails />
           </Route>
-          <Route path="/profile/:id/listings">
+          <Route path="/profile/:id/listings" exact={true}>
             <UserListings />
           </Route>
           <Route path="/profile">
             <Profile />
           </Route>
+
+          {/* <Route path="/profile/:username" exact={true} component={Profile}/> */}
         </Switch>
       )}
     </>

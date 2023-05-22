@@ -21,7 +21,7 @@ function UserListings() {
         <>
         <h1>Take a peep at your listings...</h1>
         {Object.values(userListings).map((listing) => (
-            <ListingIndexItem listing={listing}/>
+            <ListingIndexItem key={listing.id} listing={listing}/>
         ))}
         </>
     )

@@ -32,11 +32,13 @@ body {
 }
 
 .listing-card .description {
-  max-height: 2.7em;
+  max-height: 3.8em;
+  /* overflow: auto; */
   overflow: hidden;
   line-height: 1.3em;
   flex-grow: 1;
 }
+
 
 .listing-card .description.expanded {
   max-height: none;
