@@ -66,7 +66,7 @@ export const getListingById = (listingId) => async (dispatch) => {
 
 /********************* delete a listing *********************/
 export const deleteListingById = (listingId) => async (dispatch) => {
-    const response = await fetch(`/api/listings/${listingId}`, {
+    const response = await fetch(`/api/listings/${listingId}/delete`, {
         method: "DELETE",
     });
     if (!response.ok) {
@@ -160,7 +160,8 @@ export default function reducer(state = initialState, action) {
         }
         case UPDATE_LISTING: {
             // Contains the updated listing data from the action
-            return { ...state, [action.payload.id]: action.payload }
+            const updatedListing = action.payload;
+            return { ...state, allListings: { ...state.allListings, [updatedListing.id]: updatedListing}, listing: {...state.listing, ...updatedListing}}
         }
         case GET_USER_LISTINGS: {
             const newState = { ...state, userListings: action.payload };
