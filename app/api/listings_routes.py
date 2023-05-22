@@ -34,12 +34,23 @@ def get_listing(listingId):
 @listings_routes.route('/new', methods=["POST"])
 @login_required
 def create_listing():
-    user_id = current_user.id
     # Creates instance of ListingForm class
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # x = request.get_json()
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
+    # print(x)
     if form.validate_on_submit():
         listing = Listing()
+        listing.user_id = current_user.id
+        # print(listing)
         form.populate_obj(listing)
 
         db.session.add(listing)
@@ -49,7 +60,7 @@ def create_listing():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #Delete listing by id
-@listings_routes.route('/<int:listingId>/', methods=['DELETE'])
+@listings_routes.route('/<int:listingId>/delete', methods=['DELETE'])
 @login_required
 def delete_listing(listingId):
     listing = Listing.query.get(listingId)
@@ -69,6 +80,7 @@ def delete_listing(listingId):
 @listings_routes.route('/<int:listingId>/edit', methods=['PUT'])
 @login_required
 def update_listing(listingId):
+    print("This means I recieved the PUT requested:", listingId)
     listing = Listing.query.get(listingId)
 
     if not listing:
@@ -82,9 +94,7 @@ def update_listing(listingId):
         form.populate_obj(listing)
 
         db.session.commit()
+        print("Listing is successful:", listing.to_dict())
         return listing.to_dict()
     else:
-
-        form.title.data = listing.title
-
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400

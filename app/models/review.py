@@ -13,8 +13,8 @@ class Review(db.Model):
     upvotes = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     listing_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('listings.id')))
-    created_at = db.Column(db.Date, default=datetime.today)
-    updated_at = db.Column(db.Date, default=datetime.today)
+    # created_at = db.Column(db.DateTime, default=datetime.now)
+    # updated_at = db.Column(db.DateTime, default=datetime.now)
 
     listing = db.relationship('Listing', back_populates="reviews")
     user = db.relationship('User', back_populates='reviews')
@@ -27,6 +27,6 @@ class Review(db.Model):
             'upvotes': self.upvotes,
             'user_id': self.user_id,
             'listing_id': self.listing_id,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            # 'created_at': self.created_at,
+            # 'updated_at': self.updated_at
         }
