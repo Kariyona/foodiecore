@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired
 
 class ListingForm(FlaskForm):
@@ -9,5 +9,5 @@ class ListingForm(FlaskForm):
     state = StringField('State', validators=[DataRequired()])
     country = StringField('Country', validators=[DataRequired()])
     hours = StringField('Hours', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
     image_url = StringField('Image URL')

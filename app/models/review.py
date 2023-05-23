@@ -26,9 +26,6 @@ class Review(db.Model):
             'comment': self.comment,
             'upvotes': self.upvotes,
             'user_id': self.user_id,
-            'review_firstname': self.user.first_name,
-            'review_lastname': self.user.last_name,
-            'review_user_pfp': self.user.profile_picture,
             'listing_id': self.listing_id,
             'created_at': self.created_at,
             'updated_at': self.updated_at

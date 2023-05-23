@@ -14,10 +14,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    first_name = db.Column(db.String(100))
-    last_name = db.Column(db.String(100))
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
     profile_picture = db.Column(db.String(255))
-
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
     #user can have multiple listings associated with them
     listings = db.relationship('Listing', back_populates='user')
     #user can have multiple reviews associated with them
@@ -41,5 +42,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'profile_picture': self.profile_picture
+            'profile_picture': self.profile_picture,
+            'city': self.city,
+            'state': self.state
         }
