@@ -54,6 +54,11 @@ function Profile() {
             </div>
           ))}
         </div>
+
+        <h2>Manage your reviews</h2>
+        <div className="profile-reviews-container">
+          
+        </div>
       </profile-listings-container>
     </>
   );

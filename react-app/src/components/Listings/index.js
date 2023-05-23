@@ -62,7 +62,7 @@ function Listing() {
     easing: "linear",
     centerMode: true,
     centerPadding: "60px",
-    slidesToShow: 3,
+    slidesToShow: 4,
     prevArrow: <NextArrow />,
     nextArrow: <PrevArrow />,
     initialSlide: 5,
@@ -70,33 +70,27 @@ function Listing() {
   };
 
   return (
-    // <div className="page-container">
-    //   <div className="listings-container">
-    //     <div className="first-card-text">
-    //       <h1>Check out these delicious food spots!</h1>
-    //       <i class="fa-solid fa-arrow-right"></i>
-    //     </div>
-    //     <Slider {...settings}>
-    //       {Object.values(listings).map((listing) => (
-    //         <ListingIndexItem key={listing.id} listing={listing} />
-    //       ))}
-    //     </Slider>
-    //   </div>
-    // </div>
     <>
-    <div className="index-container">
-      <div className="first-card-text">
-        <h1>Check out these delicious food spots!</h1>
-        {/* <i class="fa-solid fa-arrow-right"></i> */}
-      </div>
-
-      <Slider {...settings}>
-        {Object.values(listings).map((listing) => (
-          <div className="carousel-item" key={listing.id}>
-            <ListingIndexItem key={listing.id} listing={listing} />
+      <div className="index-container">
+        <div className="first-card-text">
+          <h1>Check out these delicious food spots!</h1>
+          <div className="categories">
+            <p>Breakfast v</p>
+            <p>Lunch v</p>
+            <p>Dinner v</p>
+            <p>Dessert v</p>
+            <p>Beverages v</p>
           </div>
-        ))}
-      </Slider>
+          {/* <i class="fa-solid fa-arrow-right"></i> */}
+        </div>
+
+        <Slider {...settings}>
+          {Object.values(listings).map((listing) => (
+            <div className="carousel-item" key={listing.id}>
+              <ListingIndexItem key={listing.id} listing={listing} />
+            </div>
+          ))}
+        </Slider>
       </div>
     </>
   );

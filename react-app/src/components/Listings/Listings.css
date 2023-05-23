@@ -87,7 +87,9 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px;
-    padding: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+
     background-color: #fcf7f7;
     border-radius: 5px;
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
@@ -109,4 +111,9 @@ body {
   font-style: italic;
   margin-right: 5px;
   margin-top: 50px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
 }
