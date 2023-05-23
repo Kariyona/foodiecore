@@ -98,3 +98,18 @@ def update_listing(listingId):
         return listing.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+#Get all Reviews by a Listing's id
+@listings_routes.route('/<int:listingId>/reviews')
+@login_required
+def get_listing_reviews(listingId):
+    listing = Listing.query.get(listingId)
+
+    if not listing:
+        return {'errors': ['Listing does not exist']}, 404
+
+    reviews = {}
+    for review in listing.reviews:
+        obj = review.to_dict()
+        reviews[obj["id"]] = obj
+    return reviews, 200
