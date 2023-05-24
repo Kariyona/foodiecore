@@ -28,5 +28,13 @@ class Review(db.Model):
             'user_id': self.user_id,
             'listing_id': self.listing_id,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'user': {
+                'id': self.user.id,
+                'first_name': self.user.first_name,
+                'last_name': self.user.last_name,
+                'city': self.user.city,
+                'state': self.user.state,
+                'user_pfp': self.user.profile_picture
+            }
         }

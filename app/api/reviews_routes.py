@@ -34,12 +34,21 @@ def get_review(reviewId):
     if not review:
         return {'errors': ['Review does not exist']}, 404
 
-    return review.to_dict(), 200
+    review_data_obj = review.to_dict()
+    review_data_obj['user'] = {
+        'id': review.user.id,
+        'first_name': review.user.first_name,
+        'last_name': review.user.last_name,
+        'city': review.user.city,
+        'state': review.user.state,
+        'user_pfp': review.user.profile_picture
+    }
+    return review_data_obj, 200
 
 # Edit a review
 
 
-@reviews_routes.route('/<int:reviewId>/edit')
+@reviews_routes.route('/<int:reviewId>/edit', methods=['PUT'])
 @login_required
 def edit_review(reviewId):
     review = Review.query.get(reviewId)
@@ -60,3 +69,17 @@ def edit_review(reviewId):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # Delete a review
+@reviews_routes.route('/<int:reviewId>/delete', methods=['DELETE'])
+@login_required
+def delete_review(reviewId):
+    review = Review.query.get(reviewId)
+
+    if not review:
+        return {'errors': ['Review does not exist']}, 404
+
+    if review.user_id == current_user.id:
+        db.session.delete(review)
+        db.session.commit()
+        return {'message': 'Review has successfully been deleted!'}
+    else:
+        return {'errors': ['Unauthorized']}, 401

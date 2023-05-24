@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import Listing, Review, db
+from app.models import Listing, Review, User, db
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from ..forms.listing_form import ListingForm
@@ -148,6 +148,9 @@ def create_review(listingId):
 
         review.user_id = current_user.id
         review.listing_id = listingId
+
+        # Grabs the user object and assigns it to review.user
+        review.user = User.query.get(review.user_id)
 
         form.populate_obj(review)
         print("is form populating?", review.to_dict())

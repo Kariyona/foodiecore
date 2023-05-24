@@ -3,6 +3,7 @@ export const GET_LISTING_REVIEWS = "reviews/GET_REVIEWS"
 export const GET_REVIEW = "reviews/GET_REVIEW";
 export const CREATE_REVIEW = "reviews/CREATE_REVIEW";
 export const UPDATE_REVIEW = "reviews/UPDATE_REVIEW";
+export const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 
 // action creators
 export const getListingReviews = (reviews) => ({
@@ -25,6 +26,10 @@ export const updateReview = (review) => ({
     payload: review
 })
 
+export const deleteReview = (review) => ({
+    type: DELETE_REVIEW,
+    payload: review
+})
 // THUNKS - START
 /********************* retrieve reviews for a listing *********************/
 export const getReviewsOfListing = (listingId) => async (dispatch) => {
@@ -39,6 +44,18 @@ export const getReviewsOfListing = (listingId) => async (dispatch) => {
     }
 }
 
+/********************* retrieve review by review id *********************/
+export const getReviewById = (reviewId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}`)
+    if (!response.ok) {
+        const errors = await response.json()
+        return errors
+    } else {
+        const review = await response.json()
+        dispatch(getReview(review))
+        return review;
+    }
+}
 /**************************** create a review *****************************/
 export const createNewReview = (listingId, review) => async (dispatch) => {
     const response = await fetch(`/api/listings/${listingId}/reviews/new`, {
@@ -76,8 +93,21 @@ export const editReview = (reviewData, reviewId) => async(dispatch) => {
         return updatedReview;
     }
 }
+
+/**************************** delete a review *****************************/
+export const deleteReviewById = (reviewId) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${reviewId}/delete`, {
+        method: "DELETE",
+    })
+    if (!response.ok) {
+        const errors = await response.json()
+        return errors
+    } else {
+        dispatch(deleteReview(reviewId))
+    }
+}
 // REDUCERS
-const initialState = { reviews: {} };
+const initialState = { reviews: {}, review: {} };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -85,14 +115,30 @@ export default function reducer(state = initialState, action) {
             const newState = { ...state, reviews: action.payload }
             return newState;
         }
+        case GET_REVIEW: {
+            const newState = { ...state, review: action.payload };
+            return newState;
+        }
         case CREATE_REVIEW: {
-            const newState = { ...state };
-            newState.reviews[action.payload.id] = action.payload;
+            // const newState = { ...state };
+            // newState.reviews[action.payload.id] = action.payload;
+            // return newState;
+            const newReview = action.payload
+            const newState = { ...state, reviews: { ...state.reviews, [newReview.id]: newReview }}
             return newState;
         }
         case UPDATE_REVIEW: {
             const updatedReview = action.payload;
             return { ...state, reviews: { ...state.reviews, [updatedReview.id]: updatedReview}}
+        }
+        case DELETE_REVIEW: {
+            // const newState = { ...state }
+            // delete newState.reviews[action.payload.id]
+            // return newState;
+            const deletedReviewId = action.payload.id;
+            const { [deletedReviewId]: deletedReview, ...reviewsState} = state.reviews;
+            const newState = { ...state, reviews: reviewsState }
+            return newState;
         }
         default:
             return state;

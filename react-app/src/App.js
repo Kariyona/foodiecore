@@ -14,7 +14,7 @@ import CreateReviewForm from "./components/Reviews/CreateReviewForm";
 
 import Sidebar from "./components/Navigation/Sidebar";
 import UserListings from "./components/Listings/UserListings";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,9 +50,9 @@ function App() {
           <Route path="/profile/:id/listings" exact={true}>
             <UserListings />
           </Route>
-          <Route path="/profile">
+          {/* <Route path="/profile">
             <Profile />
-          </Route>
+          </Route> */}
 
           {/* <Route path="/profile/:username" exact={true} component={Profile}/> */}
         </Switch>
