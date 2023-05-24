@@ -4,6 +4,7 @@ export const GET_REVIEW = "reviews/GET_REVIEW";
 export const CREATE_REVIEW = "reviews/CREATE_REVIEW";
 export const UPDATE_REVIEW = "reviews/UPDATE_REVIEW";
 export const DELETE_REVIEW = "reviews/DELETE_REVIEW";
+export const GET_USER_REVIEWS = "reviews/GET_USER_REVIEWS";
 
 // action creators
 export const getListingReviews = (reviews) => ({
@@ -30,6 +31,12 @@ export const deleteReview = (review) => ({
     type: DELETE_REVIEW,
     payload: review
 })
+
+export const getReviewsByUser = (reviews) => ({
+    type: GET_USER_REVIEWS,
+    payload: reviews
+})
+
 // THUNKS - START
 /********************* retrieve reviews for a listing *********************/
 export const getReviewsOfListing = (listingId) => async (dispatch) => {
@@ -106,8 +113,25 @@ export const deleteReviewById = (reviewId) => async (dispatch) => {
         dispatch(deleteReview(reviewId))
     }
 }
+
+/**************************** get all of a user's reviews *****************************/
+export const getReviewsByUserId = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/${id}/reviews`, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    if (!response.ok) {
+        const errors = await response.json()
+        return errors
+    } else {
+        const reviews = await response.json()
+        dispatch(getReviewsByUser(reviews))
+        return reviews;
+    }
+}
 // REDUCERS
-const initialState = { reviews: {}, review: {} };
+const initialState = { reviews: {}, review: {}, userReviews: {} };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -138,6 +162,10 @@ export default function reducer(state = initialState, action) {
             const deletedReviewId = action.payload.id;
             const { [deletedReviewId]: deletedReview, ...reviewsState} = state.reviews;
             const newState = { ...state, reviews: reviewsState }
+            return newState;
+        }
+        case GET_USER_REVIEWS: {
+            const newState = { ...state, userReviews: action.payload };
             return newState;
         }
         default:

@@ -132,3 +132,7 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.listing-card-row {
+  display: flex;
+}
