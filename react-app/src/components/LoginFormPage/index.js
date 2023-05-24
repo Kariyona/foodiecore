@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import './LoginForm.css';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +21,7 @@ function LoginFormPage() {
       setErrors(data);
     }
   };
+
 
   return (
     <>
@@ -49,6 +51,7 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+
       </form>
     </>
   );

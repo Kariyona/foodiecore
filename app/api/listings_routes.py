@@ -10,7 +10,7 @@ listings_routes = Blueprint('listings', __name__)
 
 
 @listings_routes.route('')
-@login_required
+# @login_required
 def get_listings():
     all_listings = Listing.query.all()
     # print(listings)
@@ -25,7 +25,7 @@ def get_listings():
 
 
 @listings_routes.route('/<int:listingId>')
-@login_required
+# @login_required
 def get_listing(listingId):
     listing = Listing.query.get(listingId)
 
@@ -111,9 +111,8 @@ def update_listing(listingId):
 
 # Get all Reviews by a Listing's id
 
-
 @listings_routes.route('/<int:listingId>/reviews')
-@login_required
+# @login_required
 def get_listing_reviews(listingId):
     listing = Listing.query.get(listingId)
 
