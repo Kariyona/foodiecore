@@ -9,7 +9,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.Text, nullable=False)
+    comment = db.Column(db.String(2500), nullable=False)
     upvotes = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     listing_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('listings.id')))

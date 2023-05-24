@@ -32,21 +32,18 @@ function Sidebar() {
       </div>
       {expanded && (
         <>
-          <NavLink exact to={`/profile/${user.username}`} activeClassName="active" className="sidebar-link">
+          <NavLink exact to={`/profile/${user.id}`} activeClassName="active" className="sidebar-link">
             Profile
-          </NavLink>
-          <NavLink exact to="/bookmarks" activeClassName="active" className="sidebar-link">
-            Bookmarks
-          </NavLink>
-          <NavLink exact to={`/profile/${user.id}/listings`} activeClassName="active" className="sidebar-link">
-            View your listings
           </NavLink>
           <NavLink exact to="/listings/new" activeClassName="active" className="sidebar-link">
             Post a new Listing!
           </NavLink>
-          <NavLink exact to="/" activeClassName="active" className="sidebar-link">
-            Write a Review!
+          <NavLink exact to="/bookmarks" activeClassName="active" className="sidebar-link">
+            Coming soon...
           </NavLink>
+          {/* <NavLink exact to="/" activeClassName="active" className="sidebar-link">
+            Write a Review!
+          </NavLink> */}
         </>
       )}
     </div>

@@ -6,6 +6,7 @@ import { deleteReviewById, getReviewById, getReviewsOfListing } from "../../stor
 import CreateReviewForm from "../Reviews/CreateReviewForm";
 import { useModal } from "../../context/Modal";
 import EditReviewModal from "../Reviews/EditModalReview";
+import DeleteReviewModal from '../Reviews/DeleteModalReview';
 
 const ListingDetails = () => {
   let dispatch = useDispatch();
@@ -21,6 +22,7 @@ const ListingDetails = () => {
 
   const { setModalContent } = useModal();
   const [editReviewId, setEditReviewId] = useState(null);
+  const [deleteReviewId, setDeleteReviewId] = useState(null);
 
   // const [showModal, setShowModal]
   useEffect(() => {
@@ -42,7 +44,7 @@ const ListingDetails = () => {
   }
 
   const handleReviewDelete = (reviewId) => {
-    dispatch(deleteReviewById(reviewId))
+    setModalContent(<DeleteReviewModal reviewId={reviewId} onDelete={() => setDeleteReviewId(reviewId)}/>)
   }
 
   return (

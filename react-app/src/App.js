@@ -14,7 +14,7 @@ import CreateReviewForm from "./components/Reviews/CreateReviewForm";
 
 import Sidebar from "./components/Navigation/Sidebar";
 import UserListings from "./components/Listings/UserListings";
-// import Profile from "./components/Profile";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,13 +47,13 @@ function App() {
           <Route path="/listings/:listingId">
             <ListingDetails />
           </Route>
-          <Route path="/profile/:id/listings" exact={true}>
+          <Route path="/profile/:id" exact={true}>
             <UserListings />
           </Route>
-          {/* <Route path="/profile">
-            <Profile />
-          </Route> */}
 
+            <Route path="/" >
+            <Listing />
+          </Route>
           {/* <Route path="/profile/:username" exact={true} component={Profile}/> */}
         </Switch>
       )}
