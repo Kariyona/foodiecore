@@ -14,7 +14,7 @@ import CreateReviewForm from "./components/Reviews/CreateReviewForm";
 
 import Sidebar from "./components/Navigation/Sidebar";
 import UserListings from "./components/Listings/UserListings";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
