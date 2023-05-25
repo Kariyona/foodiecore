@@ -16,7 +16,7 @@ function ProfileButton({ user }) {
   const history = useHistory();
 
   const [errors, setErrors] = useState([]);
-  
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -44,10 +44,6 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> backend-routes
   const handleDemoLogin = async (e) => {
     e.preventDefault()
     const demoEmail = "demo@aa.io"
@@ -59,10 +55,6 @@ function ProfileButton({ user }) {
     }
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> backend-routes
   return (
     <>
       <button onClick={openMenu} className="profile-btn">
