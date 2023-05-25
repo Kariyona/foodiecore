@@ -9,13 +9,24 @@ function Navigation({ isLoaded }) {
   const history = useHistory();
 
 
+  const ProfileClick = () => {
+    history.push(`/profile/${sessionUser.id}`)
+  }
+
+  const CreateListingClick = () => {
+    history.push(`/listings/new`)
+  }
+
   return (
     <div className="navigation-container">
-      <NavLink exact to="/listings" id="home">
+      <NavLink exact to="/" id="home">
         foodiecore
       </NavLink>
 
       <div className="group-links">
+        {sessionUser && <button className="nav-buttons" onClick={ProfileClick}>Profile</button>}
+        {sessionUser && <button className="nav-buttons" onClick={CreateListingClick}>Create New Listing</button>}
+
         {isLoaded && (
           <div className="profile-button-container">
             <ProfileButton user={sessionUser} />

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { deleteListingById, getListingById } from "../../store/listings";
-import { deleteReviewById, getReviewById, getReviewsOfListing } from "../../store/reviews";
+import {
+  deleteReviewById,
+  getReviewById,
+  getReviewsOfListing,
+} from "../../store/reviews";
 import CreateReviewForm from "../Reviews/CreateReviewForm";
 import { useModal } from "../../context/Modal";
 import EditReviewModal from "../Reviews/EditModalReview";
-import DeleteReviewModal from '../Reviews/DeleteModalReview';
-import OpenModalButton from '../OpenModalButton/index'
+import DeleteReviewModal from "../Reviews/DeleteModalReview";
+import OpenModalButton from "../OpenModalButton/index";
 
 const ListingDetails = () => {
   let dispatch = useDispatch();
@@ -41,9 +45,9 @@ const ListingDetails = () => {
   };
 
   const handleReviewEdit = (reviewId) => {
-    setEditReviewId(reviewId)
-    setModalContent(<EditReviewModal reviewId={reviewId}/>)
-  }
+    setEditReviewId(reviewId);
+    setModalContent(<EditReviewModal reviewId={reviewId} />);
+  };
 
   // const handleReviewDelete = (reviewId) => {
   //   setModalContent(<DeleteReviewModal reviewId={reviewId} onDelete={() => setDeleteReviewId(reviewId)}/>)
@@ -53,7 +57,6 @@ const ListingDetails = () => {
   //   dispatch(deleteReviewById(reviewId))
   //   setDeleteReviewId(reviewId)
   // }
-
 
   // const filteredReviews = Object.values(reviews).filter((review) => review.id !== deleteReviewId)
 
@@ -69,9 +72,13 @@ const ListingDetails = () => {
             </p>
             <p>Business hours: {listing.hours}pm</p>
             <p>{listing.description}</p>
-            {ownerOfListing && <button onClick={handleEditListing}>Edit</button>}
             {ownerOfListing && (
-              <button onClick={() => handleDeleteListing(listingId)}>Delete</button>
+              <button onClick={handleEditListing}>Edit</button>
+            )}
+            {ownerOfListing && (
+              <button onClick={() => handleDeleteListing(listingId)}>
+                Delete
+              </button>
             )}
           </>
         )}
@@ -91,17 +98,19 @@ const ListingDetails = () => {
             <p>{review.comment}</p>
             {user && review.user_id === user.id && (
               <>
-                <button onClick={()=>handleReviewEdit(review.id)}>Edit Review</button>
+                <button onClick={() => handleReviewEdit(review.id)}>
+                  Edit Review
+                </button>
 
                 <OpenModalButton
-                      modalComponent={
-                        <DeleteReviewModal
-                          reviewId={review.id}
-                          listingId={listingId}
-                        />
-                      }
-                      buttonText="Delete"
+                  modalComponent={
+                    <DeleteReviewModal
+                      reviewId={review.id}
+                      listingId={listingId}
                     />
+                  }
+                  buttonText="Delete"
+                />
               </>
             )}
           </div>
@@ -112,7 +121,7 @@ const ListingDetails = () => {
         {user && (
           <div>
             <h2>Create a New Review</h2>
-            <CreateReviewForm listingId={listingId}/>
+            <CreateReviewForm listingId={listingId} />
           </div>
         )}
       </div>

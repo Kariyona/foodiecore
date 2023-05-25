@@ -11,8 +11,6 @@ import Listing from "./components/Listings/index";
 import CreateListingForm from "./components/Listings/CreateListingForm"
 import UpdateListingForm from "./components/Listings/UpdateListingForm";
 import CreateReviewForm from "./components/Reviews/CreateReviewForm";
-
-import Sidebar from "./components/Navigation/Sidebar";
 import UserListings from "./components/Listings/UserListings";
 
 function App() {
@@ -26,7 +24,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {user && <Sidebar />}
+
       {isLoaded && (
         <Switch>
           <Route path="/login" >

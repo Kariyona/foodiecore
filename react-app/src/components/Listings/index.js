@@ -50,7 +50,7 @@ function Listing() {
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 400,
     draggable: true,
     centerMode: true,
@@ -65,7 +65,7 @@ function Listing() {
     slidesToShow: 4,
     prevArrow: <NextArrow />,
     nextArrow: <PrevArrow />,
-    initialSlide: 5,
+    initialSlide: 2,
     pauseOnHover: true,
   };
 
@@ -85,7 +85,7 @@ function Listing() {
         </div>
 
         <Slider {...settings}>
-          {Object.values(listings).map((listing) => (
+        {Object.values(listings).map((listing) => (
             <div className="carousel-item" key={listing.id}>
               <ListingIndexItem key={listing.id} listing={listing} />
             </div>
