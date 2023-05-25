@@ -23,6 +23,11 @@ function Navigation({ isLoaded }) {
           <img src="https://i.imgur.com/G8hTFdy.jpg" />
         </NavLink>
 
+      <div className="search-bar-container">
+        <input type="text" placeholder="Search" style={{width: "450px" }}/>
+        <button type="submit">Search</button>
+      </div>
+
         <div className="group-links">
           {sessionUser && (
             <button className="nav-buttons" onClick={ProfileClick}>
