@@ -7,6 +7,7 @@ import CreateReviewForm from "../Reviews/CreateReviewForm";
 import { useModal } from "../../context/Modal";
 import EditReviewModal from "../Reviews/EditModalReview";
 import DeleteReviewModal from '../Reviews/DeleteModalReview';
+import OpenModalButton from '../OpenModalButton/index'
 
 const ListingDetails = () => {
   let dispatch = useDispatch();
@@ -16,7 +17,6 @@ const ListingDetails = () => {
   const user = useSelector((state) => state.session.user);
 
   const reviews = useSelector((state) => state.reviews.reviews);
-
   const ownerOfListing = user && listing && user.id === listing.user_id;
   // console.log("this is reviews: ", reviews)
 
@@ -29,6 +29,8 @@ const ListingDetails = () => {
     dispatch(getListingById(listingId));
     dispatch(getReviewsOfListing(listingId));
   }, [dispatch, listingId]);
+
+  if (!listing) return null;
 
   const handleEditListing = () => {
     history.push(`/listings/${listingId}/edit`);
@@ -43,9 +45,17 @@ const ListingDetails = () => {
     setModalContent(<EditReviewModal reviewId={reviewId}/>)
   }
 
-  const handleReviewDelete = (reviewId) => {
-    setModalContent(<DeleteReviewModal reviewId={reviewId} onDelete={() => setDeleteReviewId(reviewId)}/>)
-  }
+  // const handleReviewDelete = (reviewId) => {
+  //   setModalContent(<DeleteReviewModal reviewId={reviewId} onDelete={() => setDeleteReviewId(reviewId)}/>)
+  // }
+
+  // const handleReviewDelete = (reviewId) => {
+  //   dispatch(deleteReviewById(reviewId))
+  //   setDeleteReviewId(reviewId)
+  // }
+
+
+  // const filteredReviews = Object.values(reviews).filter((review) => review.id !== deleteReviewId)
 
   return (
     <>
@@ -82,7 +92,16 @@ const ListingDetails = () => {
             {user && review.user_id === user.id && (
               <>
                 <button onClick={()=>handleReviewEdit(review.id)}>Edit Review</button>
-                <button onClick={() => handleReviewDelete(review.id)}>Delete Review</button>
+
+                <OpenModalButton
+                      modalComponent={
+                        <DeleteReviewModal
+                          reviewId={review.id}
+                          listingId={listingId}
+                        />
+                      }
+                      buttonText="Delete"
+                    />
               </>
             )}
           </div>

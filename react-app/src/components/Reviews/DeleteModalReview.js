@@ -1,22 +1,23 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { deleteReviewById } from '../../store/reviews';
+import { deleteReviewById, getReviewsOfListing } from '../../store/reviews';
 
-const DeleteReviewModal = ({ reviewId, onDelete }) => {
+const DeleteReviewModal = ({ reviewId, listingId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
 
-    const handleDeleteReview = async () => {
+    const handleSubmit = async () => {
         await dispatch(deleteReviewById(reviewId))
-        onDelete()
-        closeModal()
+        await dispatch(getReviewsOfListing(listingId))
+        closeModal();
     }
 
     return (
         <div>
-            <h3>Are you sure you want to delete this review?</h3>
-            <button onClick={handleDeleteReview}>Confirm</button>
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this review?</p>
+            <button onClick={handleSubmit}>Yes</button>
             <button onClick={closeModal}>Cancel</button>
         </div>
     )

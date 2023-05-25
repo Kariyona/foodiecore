@@ -27,9 +27,9 @@ export const updateReview = (review) => ({
     payload: review
 })
 
-export const deleteReview = (review) => ({
+export const deleteReview = (reviewId) => ({
     type: DELETE_REVIEW,
-    payload: review
+    payload: reviewId
 })
 
 export const getReviewsByUser = (reviews) => ({
@@ -159,10 +159,9 @@ export default function reducer(state = initialState, action) {
             // const newState = { ...state }
             // delete newState.reviews[action.payload.id]
             // return newState;
-            const deletedReviewId = action.payload.id;
-            const { [deletedReviewId]: deletedReview, ...reviewsState} = state.reviews;
-            const newState = { ...state, reviews: reviewsState }
-            return newState;
+            const newState = { ...state }
+            delete newState[action.payload]
+            return newState
         }
         case GET_USER_REVIEWS: {
             const newState = { ...state, userReviews: action.payload };
