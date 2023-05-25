@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
+import { login } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
@@ -14,6 +15,8 @@ function ProfileButton({ user }) {
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
+  const [errors, setErrors] = useState([]);
+  
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -41,7 +44,10 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> backend-routes
   const handleDemoLogin = async (e) => {
     e.preventDefault()
     const demoEmail = "demo@aa.io"
@@ -53,7 +59,10 @@ function ProfileButton({ user }) {
     }
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> backend-routes
   return (
     <>
       <button onClick={openMenu} className="profile-btn">
@@ -64,10 +73,8 @@ function ProfileButton({ user }) {
           <>
             Hi, {user.username}
             <div></div>
-            {user.first_name} {user.last_name}
-            <p></p>
-            {user.email}
-            <p></p>
+            <p> {user.first_name}</p>
+            <p>{user.email}</p>
             <button onClick={handleLogout}>Log Out</button>
 
           </>
@@ -85,7 +92,11 @@ function ProfileButton({ user }) {
               modalComponent={<SignupFormModal />}
             />
 
+<<<<<<< HEAD
             <button onClick={handleDemoLogin}>demo user</button>
+=======
+            <button onClick={handleDemoLogin}>Demo User</button>
+>>>>>>> backend-routes
           </>
         )}
       </ul>
