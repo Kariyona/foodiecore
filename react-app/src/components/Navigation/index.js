@@ -8,34 +8,41 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
-
   const ProfileClick = () => {
-    history.push(`/profile/${sessionUser.id}`)
-  }
+    history.push(`/profile/${sessionUser.id}`);
+  };
 
   const CreateListingClick = () => {
-    history.push(`/listings/new`)
-  }
+    history.push(`/listings/new`);
+  };
 
   return (
     <>
-    <div className="navigation-container">
-      <NavLink exact to="/" id="home">
-        <img className="big-logo" src="https://i.imgur.com/G8hTFdy.jpg"/>
-      </NavLink>
+      <div className="navigation-container">
+        <NavLink className="navlink" exact to="/">
+          <img src="https://i.imgur.com/G8hTFdy.jpg" />
+        </NavLink>
 
-      <div className="group-links">
-        {sessionUser && <button className="nav-buttons" onClick={ProfileClick}>Manage Listings</button>}
-        {sessionUser && <button className="nav-buttons" onClick={CreateListingClick}>Create New Listing</button>}
+        <div className="group-links">
+          {sessionUser && (
+            <button className="nav-buttons" onClick={ProfileClick}>
+              Manage Listings
+            </button>
+          )}
+          {sessionUser && (
+            <button className="nav-buttons" onClick={CreateListingClick}>
+              Create New Listing
+            </button>
+          )}
 
-        {isLoaded && (
-          <div className="profile-button-container">
-            <ProfileButton user={sessionUser} />
-          </div>
-        )}
+          {isLoaded && (
+            <div className="profile-button-container">
+              <ProfileButton user={sessionUser} />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-    <div className="line"></div>
+      <div className="line"></div>
     </>
   );
 }
