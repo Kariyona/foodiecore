@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
 
       <div className="search-bar-container">
-        <input type="text" placeholder="Search" style={{width: "450px" }}/>
+        <input type="text" placeholder="Search - does not work yet" style={{width: "450px" }}/>
         <button type="submit">Search</button>
       </div>
 
