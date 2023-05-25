@@ -10,13 +10,18 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [first_name, setFirstname] = useState("");
+	const [last_name, setLastname] = useState("")
+	const [city, setCity] = useState("")
+	const [state, setState] = useState("")
+
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(username, email, password, first_name, last_name, city, state));
 			if (data) {
 				setErrors(data);
 			} else {
@@ -53,6 +58,45 @@ function SignupFormModal() {
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					First Name
+					<input
+						type="text"
+						name="first_name"
+						value={first_name}
+						onChange={(e) => setFirstname(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					Last Name
+					<input
+						type="text"
+						name="last_name"
+						value={last_name}
+						onChange={(e) => setLastname(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					City
+					<input
+						type="text"
+						name="city"
+						value={city}
+						onChange={(e) => setCity(e.target.value)}
+						required
+					/>
+				</label>
+				<label>
+					State
+					<input
+						type="text"
+						value={state}
+						onChange={(e) => setState(e.target.value)}
 						required
 					/>
 				</label>
