@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
     <>
       <div className="navigation-container">
         <NavLink className="navlink" exact to="/">
-          <img src="https://i.imgur.com/G8hTFdy.jpg" />
+          <img className="logo-image" src="https://i.imgur.com/G8hTFdy.jpg" />
         </NavLink>
 
       <div className="search-bar-container">

@@ -175,10 +175,14 @@ body {
 }
 
 .search-button {
-  margin-left: 5px;
+  margin-left: 8px;
   padding: 5px;
 }
 .search-bar {
-  width: 450px;
+  width: 400px;
   padding: 5px;
+}
+
+.logo-image {
+  margin-left: 15px;
 }
