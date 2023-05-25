@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-import { login } from "../../store/session";
+import { login, logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { login } from "../../store/session";
 import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
@@ -15,7 +13,6 @@ function ProfileButton({ user }) {
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
-  const [errors, setErrors] = useState([]);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -83,12 +80,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-
-<<<<<<< HEAD
-            <button onClick={handleDemoLogin}>demo user</button>
-=======
             <button onClick={handleDemoLogin}>Demo User</button>
->>>>>>> backend-routes
           </>
         )}
       </ul>
