@@ -190,7 +190,7 @@ const CreateListingForm = () => {
   return (
     <div className="form-outer-div">
           <div className="form-data">
-
+          <h3>Basics about your restaurant</h3>
             <label htmlFor="">Title</label>
             <input
               type="text"
@@ -293,10 +293,9 @@ const CreateListingForm = () => {
           <div className="form-line"></div>
 
             <div className="form-data">
-              <h3>Liven up your spot with photos</h3>
+              <h3>Liven up your listing with photos</h3>
               <p className="bio-margin">
-                Submit a link to at least one photo to publish your spot. The
-                first spot will be the preview image.
+                Submit a link to at least one photo to publish your listing. This helps attract viewers to your listing.
               </p>
               <div className="image-links">
                 <input
@@ -315,8 +314,8 @@ const CreateListingForm = () => {
             </div>
          {" "}
           <div className="form-submit-button">
-             <button className="create-btn" onClick={handleClick}>
-                Create Spot
+             <button onClick={handleClick}>
+                Create Listing
               </button>
 
           </div>
