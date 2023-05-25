@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-import { login } from "../../store/session";
+import { login, logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
@@ -12,7 +11,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
 
   const [errors, setErrors] = useState([]);
-  
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
