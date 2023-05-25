@@ -36,13 +36,6 @@ const ListingDetails = () => {
 
   if (!listing) return null;
 
-  const handleEditListing = () => {
-    history.push(`/listings/${listingId}/edit`);
-  };
-
-  const handleDeleteListing = (listingId) => {
-    dispatch(deleteListingById(listingId));
-  };
 
   const handleReviewEdit = (reviewId) => {
     setEditReviewId(reviewId);
@@ -72,14 +65,7 @@ const ListingDetails = () => {
             </p>
             <p>Business hours: {listing.hours}pm</p>
             <p>{listing.description}</p>
-            {ownerOfListing && (
-              <button onClick={handleEditListing}>Edit</button>
-            )}
-            {ownerOfListing && (
-              <button onClick={() => handleDeleteListing(listingId)}>
-                Delete
-              </button>
-            )}
+
           </>
         )}
       </div>
