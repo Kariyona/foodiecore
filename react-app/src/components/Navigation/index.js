@@ -24,8 +24,8 @@ function Navigation({ isLoaded }) {
         </NavLink>
 
       <div className="search-bar-container">
-        <input type="text" placeholder="Search - does not work yet" style={{width: "450px" }}/>
-        <button type="submit">Search</button>
+        <input className="search-bar" type="text" placeholder="Search - does not work yet" />
+        <button className="search-button" type="submit">Search</button>
       </div>
 
         <div className="group-links">

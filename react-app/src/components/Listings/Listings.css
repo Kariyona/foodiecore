@@ -173,3 +173,12 @@ body {
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
   width: 930px;
 }
+
+.search-button {
+  margin-left: 5px;
+  padding: 5px;
+}
+.search-bar {
+  width: 450px;
+  padding: 5px;
+}
