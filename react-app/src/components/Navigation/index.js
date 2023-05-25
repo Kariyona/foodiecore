@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
       </NavLink>
 
       <div className="group-links">
-        {sessionUser && <button className="nav-buttons" onClick={ProfileClick}>Profile</button>}
+        {sessionUser && <button className="nav-buttons" onClick={ProfileClick}>Manage Listings</button>}
         {sessionUser && <button className="nav-buttons" onClick={CreateListingClick}>Create New Listing</button>}
 
         {isLoaded && (
