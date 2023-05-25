@@ -7,7 +7,7 @@ const DeleteReviewModal = ({ reviewId, listingId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal()
 
-    const handleSubmit = async () => {
+    const handleDeleteSubmit = async () => {
         await dispatch(deleteReviewById(reviewId))
         await dispatch(getReviewsOfListing(listingId))
         closeModal();
@@ -17,7 +17,7 @@ const DeleteReviewModal = ({ reviewId, listingId }) => {
         <div>
             <h3>Confirm Delete</h3>
             <p>Are you sure you want to delete this review?</p>
-            <button onClick={handleSubmit}>Yes</button>
+            <button onClick={handleDeleteSubmit}>Yes</button>
             <button onClick={closeModal}>Cancel</button>
         </div>
     )

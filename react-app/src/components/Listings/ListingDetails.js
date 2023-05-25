@@ -42,16 +42,6 @@ const ListingDetails = () => {
     setModalContent(<EditReviewModal reviewId={reviewId} />);
   };
 
-  // const handleReviewDelete = (reviewId) => {
-  //   setModalContent(<DeleteReviewModal reviewId={reviewId} onDelete={() => setDeleteReviewId(reviewId)}/>)
-  // }
-
-  // const handleReviewDelete = (reviewId) => {
-  //   dispatch(deleteReviewById(reviewId))
-  //   setDeleteReviewId(reviewId)
-  // }
-
-  // const filteredReviews = Object.values(reviews).filter((review) => review.id !== deleteReviewId)
 
   return (
     <>
