@@ -26,8 +26,6 @@ const ListingDetails = () => {
 
   const { setModalContent } = useModal();
   const [editReviewId, setEditReviewId] = useState(null);
-  const [deleteReviewId, setDeleteReviewId] = useState(null);
-
   // const [showModal, setShowModal]
   useEffect(() => {
     dispatch(getListingById(listingId));
@@ -45,6 +43,8 @@ const ListingDetails = () => {
 
   return (
     <>
+    <div className='listing-and-review'>
+
       <div className="listing-card-details">
         {listing && (
           <>
@@ -60,18 +60,21 @@ const ListingDetails = () => {
         )}
       </div>
 
-      <div className="review-card">
+      <div className="review-container">
         {Object.values(reviews).map((review) => (
-          <div key={review.id}>
+          <div className="review-card" key={review.id}>
+            <div className="review-img-and-info">
             <img src={review.user?.user_pfp} id="review-user-image" />
-            <p>
-              {review.user?.first_name} {review.user?.last_name}
-            </p>
-            <p>
+            <div className="user-review-info">
+              <p>{review.user?.first_name} {review.user?.last_name}<br />
+
+              <span className="user-location">
               {review.user?.city}, {review.user?.state}
-            </p>
-            <p>rating: {review.rating}</p>
-            <p>{review.comment}</p>
+                </span> <br />
+            rating: {review.rating}</p></div>
+            </div>
+
+            <p className="review-comment">{review.comment}</p>
             {user && review.user_id === user.id && (
               <>
                 <button onClick={() => handleReviewEdit(review.id)}>
@@ -92,6 +95,7 @@ const ListingDetails = () => {
           </div>
         ))}
       </div>
+    </div>
 
       <div className="create-new-review">
         {user && (

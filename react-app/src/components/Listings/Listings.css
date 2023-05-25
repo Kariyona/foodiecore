@@ -102,14 +102,17 @@ body {
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
   width: 450px;
   background-color: #fcf7f7;
+  margin-top: 9px;
 
 }
 
 #review-user-image {
-  width: 80px;
-  height: 80px;
+  width: 65px;
+  height: 65px;
   object-fit: cover;
   border-radius: 50px;
+  margin-left: 15px;
+  margin-top: 15px;
 }
 /* .first-card-text i {
     font-size: 50pt;
@@ -135,4 +138,26 @@ body {
 
 .listing-card-row {
   display: flex;
+}
+
+.listing-and-review {
+  display: flex;
+}
+
+.user-review-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-img-and-info {
+  display: flex;
+  gap: 15px;
+}
+
+.user-location {
+  color: grey;
+}
+
+.review-comment {
+  margin-left: 15px;
 }
