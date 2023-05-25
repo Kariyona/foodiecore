@@ -1,9 +1,9 @@
 .profile-dropdown {
   position: absolute;
-  top: 5px;
-  right: 80px;
+  top: 130px;
+  right: 40px;
   border: 1px solid black;
-  padding: 15px;
+  padding: 10px;
   padding-left: 10px;
   width: 150px;
   cursor: pointer;
@@ -52,11 +52,21 @@
   padding-right: 15px;
   border: none;
   border-radius: 5px;
-  background-color: lightslategray;
+  background-color: rgb(251, 160, 165);
   cursor: pointer;
 }
 
 
 .profile-button-container {
   margin-right: 15px;
+}
+
+.nav-buttons {
+  margin: 30px;
+  border: none;
+  padding: 5px;
+  color: white;
+  background-color: rgb(251, 160, 165);
+  border-radius: 5px;
+  font-size: 11pt;
 }

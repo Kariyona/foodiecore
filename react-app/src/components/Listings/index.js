@@ -5,37 +5,37 @@ import ListingIndexItem from "./ListingIndexItem";
 import "./Listings.css";
 import Slider from "react-slick";
 
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        // display: "block",
-        background: "lightpink",
-        margin: "50px",
-      }}
-      onClick={onClick}
-    />
-  );
-}
+// function NextArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         // display: "block",
+//         background: "lightpink",
+//         margin: "50px",
+//       }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        // display: "block",
-        background: "lightpink",
-        margin: "50px",
-      }}
-      onClick={onClick}
-    />
-  );
-}
+// function PrevArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         // display: "block",
+//         background: "lightpink",
+//         margin: "50px",
+//       }}
+//       onClick={onClick}
+//     />
+//   );
+// }
 
 function Listing() {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function Listing() {
     draggable: true,
     centerMode: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 1500,
     arrows: true,
     accessibility: true,
     focusOnSelect: true,
@@ -63,8 +63,8 @@ function Listing() {
     centerMode: true,
     centerPadding: "60px",
     slidesToShow: 4,
-    prevArrow: <NextArrow />,
-    nextArrow: <PrevArrow />,
+    // prevArrow: <NextArrow />,
+    // nextArrow: <PrevArrow />,
     initialSlide: 2,
     pauseOnHover: true,
   };
