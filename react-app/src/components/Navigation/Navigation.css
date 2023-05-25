@@ -70,3 +70,8 @@
   border-radius: 5px;
   font-size: 11pt;
 }
+
+.line {
+  border: solid rgb(246, 208, 210) 1px;
+  /* margin-bottom: 5px; */
+}

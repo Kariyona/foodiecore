@@ -18,6 +18,7 @@ function Navigation({ isLoaded }) {
   }
 
   return (
+    <>
     <div className="navigation-container">
       <NavLink exact to="/" id="home">
         <img className="big-logo" src="https://i.imgur.com/G8hTFdy.jpg"/>
@@ -34,6 +35,8 @@ function Navigation({ isLoaded }) {
         )}
       </div>
     </div>
+    <div className="line"></div>
+    </>
   );
 }
 
