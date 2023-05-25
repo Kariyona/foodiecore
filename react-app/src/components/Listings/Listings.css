@@ -161,3 +161,15 @@ body {
 .review-comment {
   margin-left: 15px;
 }
+
+.create-new-review {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fcf7f7;
+  border-radius: 5px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+  width: 930px;
+}

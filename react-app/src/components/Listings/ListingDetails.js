@@ -34,69 +34,13 @@ const ListingDetails = () => {
 
   if (!listing) return null;
 
-
   const handleReviewEdit = (reviewId) => {
     setEditReviewId(reviewId);
     setModalContent(<EditReviewModal reviewId={reviewId} />);
   };
 
-
   return (
     <>
-    <div className='listing-and-review'>
-
-      <div className="listing-card-details">
-        {listing && (
-          <>
-            <h1>{listing.title}</h1>
-            <img src={listing.image_url} id="listing-image" />
-            <p>
-              {listing.address}, {listing.city}, {listing.state}
-            </p>
-            <p>Business hours: {listing.hours}pm</p>
-            <p>{listing.description}</p>
-
-          </>
-        )}
-      </div>
-
-      <div className="review-container">
-        {Object.values(reviews).map((review) => (
-          <div className="review-card" key={review.id}>
-            <div className="review-img-and-info">
-            <img src={review.user?.user_pfp} id="review-user-image" />
-            <div className="user-review-info">
-              <p>{review.user?.first_name} {review.user?.last_name}<br />
-
-              <span className="user-location">
-              {review.user?.city}, {review.user?.state}
-                </span> <br />
-            rating: {review.rating}</p></div>
-            </div>
-
-            <p className="review-comment">{review.comment}</p>
-            {user && review.user_id === user.id && (
-              <>
-                <button onClick={() => handleReviewEdit(review.id)}>
-                  Edit Review
-                </button>
-
-                <OpenModalButton
-                  modalComponent={
-                    <DeleteReviewModal
-                      reviewId={review.id}
-                      listingId={listingId}
-                    />
-                  }
-                  buttonText="Delete"
-                />
-              </>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-
       <div className="create-new-review">
         {user && (
           <div>
@@ -104,6 +48,62 @@ const ListingDetails = () => {
             <CreateReviewForm listingId={listingId} />
           </div>
         )}
+      </div>
+
+      <div className="listing-and-review">
+        <div className="listing-card-details">
+          {listing && (
+            <>
+              <h1>{listing.title}</h1>
+              <img src={listing.image_url} id="listing-image" />
+              <p>
+                {listing.address}, {listing.city}, {listing.state}
+              </p>
+              <p>Business hours: {listing.hours}pm</p>
+              <p>{listing.description}</p>
+            </>
+          )}
+        </div>
+
+        <div className="review-container">
+          {Object.values(reviews).map((review) => (
+            <div className="review-card" key={review.id}>
+              <div className="review-img-and-info">
+                <img src={review.user?.user_pfp} id="review-user-image" />
+                <div className="user-review-info">
+                  <p>
+                    {review.user?.first_name} {review.user?.last_name}
+                    <br />
+                    <span className="user-location">
+                      {review.user?.city}, {review.user?.state}
+                    </span>{" "}
+                    <br />
+                    rating: {review.rating}
+                  </p>
+                </div>
+              </div>
+
+              <p className="review-comment">{review.comment}</p>
+              {user && review.user_id === user.id && (
+                <>
+                  <button onClick={() => handleReviewEdit(review.id)}>
+                    Edit Review
+                  </button>
+
+                  <OpenModalButton
+                    modalComponent={
+                      <DeleteReviewModal
+                        reviewId={review.id}
+                        listingId={listingId}
+                      />
+                    }
+                    buttonText="Delete"
+                  />
+                </>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
