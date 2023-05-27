@@ -16,6 +16,7 @@ function Navigation({ isLoaded }) {
     history.push(`/listings/new`);
   };
 
+  console.log("testing")
   return (
     <>
       <div className="navigation-container">
