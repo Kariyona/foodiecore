@@ -186,3 +186,25 @@ body {
 .logo-image {
   margin-left: 15px;
 }
+
+.edit-listing-button {
+  margin-right: 10px;
+  font-family: Comfortaa;
+}
+
+.edit-delete-listing-button {
+  margin-top: 15px;
+
+}
+
+.delete-listing-button {
+  font-family: Comfortaa;
+}
+
+.keep-listing-button {
+  font-family: Comfortaa;
+}
+
+.modal-delete-button {
+  font-family: Comfortaa;
+}

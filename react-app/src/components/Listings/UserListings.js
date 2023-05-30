@@ -44,9 +44,10 @@ function UserListings() {
             <h2>{listing.title}</h2>
             {listing.city}, {listing.state}, {listing.country}
 
-            <div>
+            <div className="edit-delete-listing-button">
 
-              <button onClick={() => handleEditListing(listing.id)}>Edit</button>
+              <button className="edit-listing-button" onClick={() => handleEditListing(listing.id)}>Edit</button>
+
               <OpenModalButton
                   modalComponent={
                     <DeleteListingModal
@@ -55,6 +56,7 @@ function UserListings() {
                     />
                   }
                   buttonText="Delete"
+                  className="modal-delete-button"
                 />
             </div>
           </div>
