@@ -108,24 +108,24 @@
 // };
 
 // export default CreateListingForm;
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createNewListing } from '../../store/listings';
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { createNewListing } from "../../store/listings";
+import "./Form.css";
 
 const CreateListingForm = () => {
-
   const history = useHistory();
   let dispatch = useDispatch();
 
-  const [title, setTitle] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [hours, setHours] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [title, setTitle] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [hours, setHours] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const [validationErrors, setValidationErrors] = useState({});
   // const [invalid, setInvalid] = useState(true);
@@ -138,20 +138,21 @@ const CreateListingForm = () => {
     if (city.length === 0) errors.city = "Please enter a valid city";
     if (state.length === 0) errors.state = "Please enter a valid state";
     if (country.length === 0) errors.country = "Please enter a valid country";
-    if (hours.length < 3) errors.hours = "Please enter a valid time in this format: 9-5";
-    if (description.length < 30) errors.description = "Please enter a description with more than 30 characters";
+    if (hours.length < 3)
+      errors.hours = "Please enter a valid time in this format: 9-5";
+    if (description.length < 30)
+      errors.description =
+        "Please enter a description with more than 30 characters";
 
+    if (imageUrl.length === 0) errors.imageUrl = "Image is required";
 
-      if (imageUrl.length === 0)
-        errors.imageUrl = "Image is required";
-
-      if (
-        !imageUrl.endsWith(".png") &&
-        !imageUrl.endsWith(".jpg") &&
-        !imageUrl.endsWith(".jpeg")
-      ) {
-        errors.previewImg = "Image URL must end in .png, .jpg, .jpeg";
-      }
+    if (
+      !imageUrl.endsWith(".png") &&
+      !imageUrl.endsWith(".jpg") &&
+      !imageUrl.endsWith(".jpeg")
+    ) {
+      errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
+    }
 
     setValidationErrors(errors);
   }, [title, address, city, state, country, hours, description, imageUrl]);
@@ -176,150 +177,136 @@ const CreateListingForm = () => {
         country,
         hours,
         description,
-        imageUrl
+        imageUrl,
       };
 
-        const createdListing = await dispatch(createNewListing(data));
+      const createdListing = await dispatch(createNewListing(data));
 
-        if (createdListing.id) {
-          history.push(`/listings/${createdListing.id}`);
-        }
+      if (createdListing.id) {
+        history.push(`/listings/${createdListing.id}`);
+      }
     }
   };
 
   return (
     <div className="form-outer-div">
-          <div className="form-data">
-          <h3>Basics about your restaurant</h3>
-            <label htmlFor="">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              required
-            />
-          </div>
+      <div className="form-data">
+        <h3>Basics about your restaurant</h3>
+        <label htmlFor="">Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+          required
+        />
+      </div>
+      {isSubmitted && <span className="errors">{validationErrors.title}</span>}
+      <div className="form-data">
+        <label htmlFor="">Address</label>
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Address"
+          required
+        />
+      </div>
+      {isSubmitted && (
+        <span className="errors">{validationErrors.address}</span>
+      )}
+      <div className="form-data-parent">
+        <div className="form-data">
+          <label htmlFor="">City</label>
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="City"
+            required
+          />
+        </div>
+        {isSubmitted && <span className="errors">{validationErrors.city}</span>}
+        <div className="form-data">
+          <label htmlFor="">State</label>
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            placeholder="STATE"
+            required
+          />
+        </div>
+      </div>
+      {isSubmitted && <span className="errors">{validationErrors.state}</span>}
+      <div className="form-data">
+        <label htmlFor="">Country</label>
+        <input
+          type="text"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          placeholder="Country"
+          required
+        />
+      </div>
+      {isSubmitted && (
+        <span className="errors">{validationErrors.country}</span>
+      )}
+      <div className="form-data">
+        <label htmlFor="">Hours</label>
+        <input
+          type="text"
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
+          placeholder="Hours"
+          required
+        />
+      </div>
+      {isSubmitted && <span className="errors">{validationErrors.hours}</span>}
+      <div className="form-line"></div>
+      <div className="form-data">
+        <h3>Describe your restaurant to people</h3>
+        <p className="bio-margin">
+          Mention the best features of your shop, including food, ambience, and
+          how your restaurant started.
+        </p>
+
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Please write at least 30 characters"
+          className="description-box"
+          required
+        />
+      </div>
+      {isSubmitted && (
+        <span className="errors">{validationErrors.description}</span>
+      )}
+      <div className="form-line"></div>
+      <div className="form-data">
+        <h3>Liven up your listing with photos</h3>
+        <p className="bio-margin">
+          Submit a link to at least one photo to publish your listing. This
+          helps attract viewers to your listing.
+        </p>
+        <div className="image-links">
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="image URL"
+            required
+          />
           {isSubmitted && (
-            <span className="errors">{validationErrors.title}</span>
+            <span className="errors">{validationErrors.imageUrl}</span>
           )}
-          <div className="form-data">
-            <label htmlFor="">Address</label>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Address"
-              required
-            />
-          </div>
-          {isSubmitted && (
-            <span className="errors">{validationErrors.address}</span>
-          )}
-          <div className="form-data-parent">
-            <div className="form-data">
-              <label htmlFor="">City</label>
-              <input
-                type="text"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                placeholder="City"
-                required
-              />
-            </div>
-            {isSubmitted && (
-              <span className="errors">{validationErrors.city}</span>
-            )}
-            <div className="form-data">
-              <label htmlFor="">State</label>
-              <input
-                type="text"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                placeholder="STATE"
-                required
-              />
-            </div>
-          </div>
-          {isSubmitted && (
-            <span className="errors">{validationErrors.state}</span>
-          )}
- <div className="form-data">
-              <label htmlFor="">Country</label>
-              <input
-                type="text"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                placeholder="Country"
-                required
-              />
-            </div>
-            {isSubmitted && (
-              <span className="errors">{validationErrors.country}</span>
-            )}
-             <div className="form-data">
-              <label htmlFor="">Hours</label>
-              <input
-                type="text"
-                value={hours}
-                onChange={(e) => setHours(e.target.value)}
-                placeholder="Hours"
-                required
-              />
-            </div>
-            {isSubmitted && (
-              <span className="errors">{validationErrors.hours}</span>
-            )}
-          <div className="form-line"></div>
+        </div>
 
-          <div className="form-data">
-            <h3>Describe your restaurant to people</h3>
-            <p className="bio-margin">
-              Mention the best features of your shop, including food, ambience, and how your restaurant started.
-            </p>
-
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Please write at least 30 characters"
-              className="description-box"
-              required
-            />
-          </div>
-          {isSubmitted && (
-            <span className="errors">{validationErrors.description}</span>
-          )}
-
-          <div className="form-line"></div>
-
-            <div className="form-data">
-              <h3>Liven up your listing with photos</h3>
-              <p className="bio-margin">
-                Submit a link to at least one photo to publish your listing. This helps attract viewers to your listing.
-              </p>
-              <div className="image-links">
-                <input
-                  type="text"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="image URL"
-                  required
-                />
-                {isSubmitted && (
-                  <span className="errors">{validationErrors.imageUrl}</span>
-                )}
-              </div>
-
-              <div className="form-line-1"></div>
-            </div>
-         {" "}
-          <div className="form-submit-button">
-             <button onClick={handleClick}>
-                Create Listing
-              </button>
-
-          </div>
-
+        <div className="form-line-1"></div>
+      </div>{" "}
+      <div className="form-submit-button">
+        <button onClick={handleClick}>Create Listing</button>
+      </div>
     </div>
   );
 };
