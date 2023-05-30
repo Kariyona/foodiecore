@@ -94,6 +94,7 @@ const UpdateListingForm = () => {
     <>
       <form className="update-listing-form" onSubmit={handleSubmit}>
         <div className="form-group-container">
+        <h3>Basics about your restaurant</h3>
         <label htmlFor="title">
           Title
           </label>
@@ -173,8 +174,8 @@ const UpdateListingForm = () => {
         </div>
         <div className="form-group-container">
         <label htmlFor="description">
-          Description
           </label>
+          <h3>Describe your restaurant</h3>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -185,8 +186,8 @@ const UpdateListingForm = () => {
         </div>
         <div className="form-group-container">
         <label htmlFor="imageUrl">
-          imageUrl
           </label>
+          <h3>Live up your post with a picture</h3>
           <input
             type="text"
             value={imageUrl}
