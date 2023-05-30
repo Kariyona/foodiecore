@@ -138,7 +138,7 @@ const CreateListingForm = () => {
     if (city.length === 0) errors.city = "Please enter a valid city";
     if (state.length === 0) errors.state = "Please enter a valid state";
     if (country.length === 0) errors.country = "Please enter a valid country";
-    if (hours.length < 3)
+    if (hours.length < 3 || hours.length > 3)
       errors.hours = "Please enter a valid time in this format: 9-5";
     if (description.length < 30)
       errors.description =
@@ -270,6 +270,7 @@ const CreateListingForm = () => {
           <input
             type="text"
             value={hours}
+            placeholder="format: '9-5'"
             onChange={(e) => setHours(e.target.value)}
           />
           {/* {validationErrors.hours && (
