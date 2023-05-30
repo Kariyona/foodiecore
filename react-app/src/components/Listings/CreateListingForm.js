@@ -177,7 +177,7 @@ const CreateListingForm = () => {
         country,
         hours,
         description,
-        imageUrl,
+        image_url: imageUrl
       };
 
       const createdListing = await dispatch(createNewListing(data));
