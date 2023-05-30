@@ -66,7 +66,8 @@ const ListingDetails = () => {
         </div>
 
         <div className="review-container">
-          {Object.values(reviews).map((review) => (
+          {/* {console.log("this is reviews", reviews)} */}
+          {Object.values(reviews).length === 0 ? (<p>Be the first to post a review!</p>) : (Object.values(reviews).map((review) => (
             <div className="review-card" key={review.id}>
               <div className="review-img-and-info">
                 <img src={review.user?.user_pfp} id="review-user-image" />
@@ -102,7 +103,8 @@ const ListingDetails = () => {
                 </>
               )}
             </div>
-          ))}
+          )))
+          }
         </div>
       </div>
     </>

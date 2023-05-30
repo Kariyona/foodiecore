@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { editListing, getListingById } from "../../store/listings";
-import "./Form.css"
+import "./Form.css";
 
 const UpdateListingForm = () => {
   const dispatch = useDispatch();
@@ -39,15 +39,14 @@ const UpdateListingForm = () => {
     console.log("Listing in state:", listing);
   }, [listing]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validateEditForm = () => {
     const errors = {};
     if (title.length < 3) errors.title = "Title must be 3 or more characters";
     if (address.length === 0) errors.address = "Please enter a valid address";
     if (city.length === 0) errors.city = "Please enter a valid city";
     if (state.length === 0) errors.state = "Please enter a valid state";
     if (country.length === 0) errors.country = "Please enter a valid country";
-    if (hours.length < 3)
+    if (hours.length < 3 || hours.length > 5)
       errors.hours = "Please enter a valid time in this format: 9-5";
     if (description.length < 30)
       errors.description =
@@ -62,42 +61,48 @@ const UpdateListingForm = () => {
     ) {
       errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
     }
+
     setValidationErrors(errors);
+    return Object.values(errors).length === 0;
+  };
 
-    const errorArr = Object.values(validationErrors);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (errorArr.length > 0) {
+    const isFormDataValid = validateEditForm();
+
+    if (!isFormDataValid) {
       return;
-    } else {
-      const updatedListing = await dispatch(
-        editListing(
-          {
-            id: listingId,
-            title,
-            address,
-            city,
-            state,
-            country,
-            hours,
-            description,
-            image_url: imageUrl,
-          },
-          listingId
-        )
-      );
-      if (!updatedListing.errors) {
-        history.push(`/listings/${listingId}`);
-      }
+    }
+
+    const updatedListing = await dispatch(
+      editListing(
+        {
+          id: listingId,
+          title,
+          address,
+          city,
+          state,
+          country,
+          hours,
+          description,
+          image_url: imageUrl,
+        },
+        listingId
+      )
+    );
+
+    if (!updatedListing.errors) {
+      history.push(`/listings/${listingId}`);
     }
   };
+
   return (
     <>
       <form className="update-listing-form" onSubmit={handleSubmit}>
         <div className="form-group-container">
-        <h3>Basics about your restaurant</h3>
-        <label htmlFor="title">
-          Title
-          </label>
+          <h3>Basics about your restaurant</h3>
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             value={title}
@@ -108,9 +113,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="address">
-          Address
-          </label>
+          <label htmlFor="address">Address</label>
           <input
             type="text"
             value={address}
@@ -121,9 +124,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="city">
-          City
-          </label>
+          <label htmlFor="city">City</label>
           <input
             type="text"
             value={city}
@@ -134,9 +135,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="state">
-          State
-          </label>
+          <label htmlFor="state">State</label>
           <input
             type="text"
             value={state}
@@ -147,9 +146,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="country">
-          Country
-          </label>
+          <label htmlFor="country">Country</label>
           <input
             type="text"
             value={country}
@@ -160,9 +157,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="hours">
-          Hours
-          </label>
+          <label htmlFor="hours">Hours</label>
           <input
             type="text"
             value={hours}
@@ -173,8 +168,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="description">
-          </label>
+          <label htmlFor="description"></label>
           <h3>Describe your restaurant</h3>
           <textarea
             value={description}
@@ -185,8 +179,7 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-        <label htmlFor="imageUrl">
-          </label>
+          <label htmlFor="imageUrl"></label>
           <h3>Live up your post with a picture</h3>
           <input
             type="text"
@@ -197,7 +190,9 @@ const UpdateListingForm = () => {
             <span className="errors">{validationErrors.imageUrl}</span>
           )}
         </div>
-        <button className="update-listing-button" type="submit">Update Listing</button>
+        <button className="update-listing-button" type="submit">
+          Update Listing
+        </button>
       </form>
     </>
   );

@@ -9,6 +9,7 @@ const EditReviewModal = ({ reviewId }) => {
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
   const review = useSelector((state) => state.reviews.review);
+  const [validationErrors, setValidationErrors] = useState({});
 
   useEffect(() => {
     dispatch(getReviewById(reviewId));
@@ -21,28 +22,34 @@ const EditReviewModal = ({ reviewId }) => {
     }
   }, [review]);
 
-    const handleEditReview = async (e) => {
-        e.preventDefault();
-        const updatedReview = await dispatch(
-            editReview({
-                id: reviewId,
-                rating,
-                comment
-            }, reviewId)
-        )
-        if (updatedReview) {
-            closeModal()
-        }
+  const handleEditReview = (e) => {
+    e.preventDefault();
+
+    const errors = {};
+    if (rating < 1 || rating > 5) {
+      errors.rating = "Rating must be between 1 and 5";
+    }
+    if (comment.length < 25) {
+      errors.comment = "Review must be at least 25 characters";
     }
 
-//   const handleEditReview = () => {
-//     const editedReview = {
-//       rating,
-//       comment
-//     };
-//     dispatch(editReview(editedReview, reviewId));
-//     closeModal();
-//   };
+    if (Object.values(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+
+    dispatch(
+      editReview(
+        {
+          id: reviewId,
+          rating,
+          comment,
+        },
+        reviewId
+      )
+    );
+    closeModal();
+  };
 
   return (
     <div>
@@ -56,6 +63,9 @@ const EditReviewModal = ({ reviewId }) => {
             onChange={(e) => setRating(e.target.value)}
           />
         </label>
+        {validationErrors.rating && (
+          <span className="errors">{validationErrors.rating}</span>
+        )}
         <label>
           What did you think about this place?
           <input
@@ -64,6 +74,9 @@ const EditReviewModal = ({ reviewId }) => {
             onChange={(e) => setComment(e.target.value)}
           />
         </label>
+        {validationErrors.comment && (
+          <span className="errors">{validationErrors.comment}</span>
+        )}
       </form>
       <button onClick={handleEditReview}>Save</button>
       <button onClick={closeModal}>Cancel</button>
