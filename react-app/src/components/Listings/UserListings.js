@@ -1,7 +1,11 @@
 // import ListingIndexItem from './ListingIndexItem'
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteListingById, editListing, getListingsByUserId } from "../../store/listings";
+import {
+  deleteListingById,
+  editListing,
+  getListingsByUserId,
+} from "../../store/listings";
 import { useHistory, useParams } from "react-router-dom";
 import ListingIndexItem from "./ListingIndexItem";
 import "./Listings.css";
@@ -27,8 +31,8 @@ function UserListings() {
   }, [dispatch, id]);
 
   const handleEditListing = (listingId) => {
-    history.push(`/listings/${listingId}/edit`)
-  }
+    history.push(`/listings/${listingId}/edit`);
+  };
 
   // const handleDeleteListing = (listingId) => {
   //   dispatch(deleteListingById(listingId))
@@ -38,39 +42,47 @@ function UserListings() {
     <>
       <h1>Take a peep at your listings...</h1>
       <div className="listing-card-row">
-        {Object.values(userListings).map((listing) => (
-          <div className="listing-card">
-            <img src={listing.image_url} id="ad-image" />
-            <h2>{listing.title}</h2>
-            {listing.city}, {listing.state}, {listing.country}
+        {Object.values(userListings).length === 0 ? (
+          <p>No listings to show</p>
+        ) : (
+          Object.values(userListings).map((listing) => (
+            <div className="listing-card">
+              <img src={listing.image_url} id="ad-image" />
+              <h2>{listing.title}</h2>
+              {listing.city}, {listing.state}, {listing.country}
+              <div className="edit-delete-listing-button">
+                <button
+                  className="edit-listing-button"
+                  onClick={() => handleEditListing(listing.id)}
+                >
+                  Edit
+                </button>
 
-            <div className="edit-delete-listing-button">
-
-              <button className="edit-listing-button" onClick={() => handleEditListing(listing.id)}>Edit</button>
-
-              <OpenModalButton
+                <OpenModalButton
                   modalComponent={
-                    <DeleteListingModal
-                      id={id}
-                      listingId={listing.id}
-                    />
+                    <DeleteListingModal id={id} listingId={listing.id} />
                   }
                   buttonText="Delete"
                   className="modal-delete-button"
                 />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <h1>Take a peep at your reviews...</h1>
       <div className="review-card-row">
-        {Object.values(userReviews).map((review) => (
-          <div key={review.id}>
-            <p>---- Insert Title of Restaurant ----</p>
-            <p>{review.comment}</p>
-          </div>
-        ))}
+        {Object.values(userReviews).length === 0 ? (
+          <p>"No reviews yet</p>
+        ) : (
+          Object.values(userReviews).map((review) => (
+            <div key={review.id}>
+              <p>---- Insert Title of Restaurant ----</p>
+              <p>{review.comment}</p>
+            </div>
+          ))
+        )}
       </div>
     </>
   );
