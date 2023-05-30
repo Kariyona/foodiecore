@@ -71,8 +71,16 @@ body {
 
 .page-container {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   /* align-items: flex-start; */
+  align-items: center;
+}
+
+.test-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .read-more-button {
