@@ -23,6 +23,7 @@ function LoginFormModal() {
 
   return (
     <>
+    <div className="login-form-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -30,6 +31,7 @@ function LoginFormModal() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        <div className="form-input-field">
         <label>
           Email
           <input
@@ -39,6 +41,8 @@ function LoginFormModal() {
             required
           />
         </label>
+        </div>
+        <div className="form-input-field">
         <label>
           Password
           <input
@@ -48,8 +52,10 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        </div>
+        <button className="login-button" type="submit">Log In</button>
       </form>
+      </div>
     </>
   );
 }

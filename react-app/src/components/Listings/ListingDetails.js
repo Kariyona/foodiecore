@@ -39,11 +39,19 @@ const ListingDetails = () => {
     setModalContent(<EditReviewModal reviewId={reviewId} />);
   };
 
+  let userHasReview = false
+  for (const review of Object.values(reviews)) {
+    if (review.user_id === user?.id) {
+      userHasReview = true;
+      break;
+    }
+  }
+
   return (
     <>
     <div className="test-container">
       <div className="create-new-review">
-        {user && (
+        {user && !userHasReview && (
           <div>
             <h2>Create a New Review</h2>
             <CreateReviewForm listingId={listingId} />

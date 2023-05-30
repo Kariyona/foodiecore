@@ -71,19 +71,19 @@ function UserListings() {
         )}
       </div>
 
-      <h1>Take a peep at your reviews...</h1>
+      {/* <h1>Take a peep at your reviews...</h1>
       <div className="review-card-row">
         {Object.values(userReviews).length === 0 ? (
           <p>"No reviews yet</p>
         ) : (
           Object.values(userReviews).map((review) => (
             <div key={review.id}>
-              <p>---- Insert Title of Restaurant ----</p>
+              <p>---- Title of Restaurant ----</p>
               <p>{review.comment}</p>
             </div>
           ))
         )}
-      </div>
+      </div> */}
     </>
   );
 }

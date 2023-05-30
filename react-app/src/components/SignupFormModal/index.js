@@ -36,6 +36,7 @@ function SignupFormModal() {
 
 	return (
 		<>
+		<div className="signup-form-container">
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
@@ -43,6 +44,8 @@ function SignupFormModal() {
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
+				<div className="form-input-container">
+				<div className="form-input-field">
 				<label>
 					Email
 					<input
@@ -52,6 +55,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					Username
 					<input
@@ -61,6 +66,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					First Name
 					<input
@@ -71,6 +78,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					Last Name
 					<input
@@ -81,6 +90,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					City
 					<input
@@ -91,6 +102,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					State
 					<input
@@ -100,6 +113,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					Password
 					<input
@@ -109,6 +124,8 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				</div>
+				<div className="form-input-field">
 				<label>
 					Confirm Password
 					<input
@@ -118,8 +135,11 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				</div>
+				<button className="signup-button" type="submit">Sign Up</button>
+				</div>
 			</form>
+			</div>
 		</>
 	);
 }
