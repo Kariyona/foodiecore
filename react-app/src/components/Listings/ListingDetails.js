@@ -39,7 +39,7 @@ const ListingDetails = () => {
     setModalContent(<EditReviewModal reviewId={reviewId} />);
   };
 
-  let userHasReview = false
+  let userHasReview = false;
   for (const review of Object.values(reviews)) {
     if (review.user_id === user?.id) {
       userHasReview = true;
@@ -49,73 +49,76 @@ const ListingDetails = () => {
 
   return (
     <>
-    <div className="test-container">
-      <div className="create-new-review">
-        {user && !userHasReview && (
-          <div>
-            <h2>Create a New Review</h2>
-            <CreateReviewForm listingId={listingId} />
-          </div>
-        )}
-      </div>
-
-      <div className="listing-and-review">
-        <div className="listing-card-details">
-          {listing && (
-            <>
-              <h1>{listing.title}</h1>
-              <img src={listing.image_url} id="listing-image" />
-              <p>
-                {listing.address}, {listing.city}, {listing.state}
-              </p>
-              <p>Business hours: {listing.hours}pm</p>
-              <p>{listing.description}</p>
-            </>
+      <div className="test-container">
+        <div className="create-new-review">
+          {user && !userHasReview && (
+            <div>
+              <h2>Create a New Review</h2>
+              <CreateReviewForm listingId={listingId} />
+            </div>
           )}
         </div>
 
-        <div className="review-container">
-          {/* {console.log("this is reviews", reviews)} */}
-          {Object.values(reviews).length === 0 ? (<p>Be the first to post a review!</p>) : (Object.values(reviews).map((review) => (
-            <div className="review-card" key={review.id}>
-              <div className="review-img-and-info">
-                <img src={review.user?.user_pfp} id="review-user-image" />
-                <div className="user-review-info">
-                  <p>
-                    {review.user?.first_name} {review.user?.last_name}
-                    <br />
-                    <span className="user-location">
-                      {review.user?.city}, {review.user?.state}
-                    </span>{" "}
-                    <br />
-                    rating: {review.rating}
-                  </p>
-                </div>
-              </div>
+        <div className="listing-and-review">
+          <div className="listing-card-details">
+            {listing && (
+              <>
+                <h1>{listing.title}</h1>
+                <img src={listing.image_url} id="listing-image" />
+                <p>
+                  {listing.address}, {listing.city}, {listing.state}
+                </p>
+                <p>Business hours: {listing.hours}pm</p>
+                <p>{listing.description}</p>
+              </>
+            )}
+          </div>
 
-              <p className="review-comment">{review.comment}</p>
-              {user && review.user_id === user.id && (
-                <>
-                  <button onClick={() => handleReviewEdit(review.id)}>
-                    Edit Review
-                  </button>
+          <div className="review-container">
+            {/* {console.log("this is reviews", reviews)} */}
+            {Object.values(reviews).length === 0 ? (
+              <p>Be the first to post a review!</p>
+            ) : (
+              Object.values(reviews).map((review) => (
+                <div className="review-card" key={review.id}>
+                  <div className="review-img-and-info">
+                    <img src={review.user?.user_pfp} id="review-user-image" />
+                    <div className="user-review-info">
+                      <p>
+                        {review.user?.first_name} {review.user?.last_name}
+                        <br />
+                        <span className="user-location">
+                          {review.user?.city}, {review.user?.state}
+                        </span>{" "}
+                        <br />
+                        rating: {review.rating}
+                      </p>
+                    </div>
+                  </div>
 
-                  <OpenModalButton
-                    modalComponent={
-                      <DeleteReviewModal
-                        reviewId={review.id}
-                        listingId={listingId}
+                  <p className="review-comment">{review.comment}</p>
+                  {user && review.user_id === user.id && (
+                    <>
+                      <button onClick={() => handleReviewEdit(review.id)}>
+                        Edit Review
+                      </button>
+
+                      <OpenModalButton
+                        modalComponent={
+                          <DeleteReviewModal
+                            reviewId={review.id}
+                            listingId={listingId}
+                          />
+                        }
+                        buttonText="Delete"
                       />
-                    }
-                    buttonText="Delete"
-                  />
-                </>
-              )}
-            </div>
-          )))
-          }
+                    </>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </>
   );
