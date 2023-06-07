@@ -1,6 +1,6 @@
 # Foodiecore
       
-Remotebnb is a soft clone of Airbnb. With recent events, many people have found themselves working remotely. Remotebnb wants to provide a service where remote workers can find cool new places to work. 
+Foodiecore is a soft clone inspired by the popular review website Yelp, with a focus on the vibrant and diverse world of Asian cuisine. In a world that celebrates the rich tapestry of flavors and culinary traditions, Foodiecore is here to satisfy the cravings of food enthusiasts who have a deep appreciation for Asian delicacies.
 
 Check out [Foodiecore](https://foodiecore.onrender.com/) 
 
