@@ -94,14 +94,16 @@ body {
 .listing-card-details {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-
+    /* margin: 10px; */
+    margin-right: 14px;
+    margin-top: 8px;
+    gap: 5px;
+    padding-left: 31px;
+    padding-right: 31px;
     background-color: #fcf7f7;
     border-radius: 5px;
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
-    width: 450px;
+    width: 445px;
 }
 
 .review-card {
