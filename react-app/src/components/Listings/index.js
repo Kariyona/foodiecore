@@ -74,13 +74,13 @@ function Listing() {
       <div className="index-container">
         <div className="first-card-text">
           <h1>Check out these delicious food spots!</h1>
-          <div className="categories">
+          {/* <div className="categories">
             <p>Breakfast v</p>
             <p>Lunch v</p>
             <p>Dinner v</p>
             <p>Dessert v</p>
             <p>Beverages v</p>
-          </div>
+          </div> */}
           {/* <i class="fa-solid fa-arrow-right"></i> */}
         </div>
 
