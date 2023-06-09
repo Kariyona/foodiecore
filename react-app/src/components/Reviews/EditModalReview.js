@@ -55,7 +55,7 @@ const EditReviewModal = ({ reviewId }) => {
     <div style={{ padding: "20px"}}>
       <h2 style={{ color: "rgb(251, 160, 165)" }}>Edit Review</h2>
       <form>
-        <label style={{ marginBottom: "7px", color: "#ea6a91"}} >Rating 1-5:</label>
+        <label style={{ marginBottom: "7px"}} >Rating 1-5:</label>
         <input
           type="text"
           value={rating}
@@ -65,7 +65,7 @@ const EditReviewModal = ({ reviewId }) => {
         {validationErrors.rating && (
           <span className="errors">{validationErrors.rating}</span>
         )}
-        <label style={{ marginBottom: "7px", color: "#ea6a91" }} >What did you think about this place?</label>
+        <label style={{ marginBottom: "7px"}} >What did you think about this place?</label>
         <input
           type="text"
           value={comment}
@@ -77,8 +77,8 @@ const EditReviewModal = ({ reviewId }) => {
           <span className="errors">{validationErrors.comment}</span>
         )}
       </form>
-      <button onClick={handleEditReview}>Save</button>
-      <button onClick={closeModal} style={{ marginLeft: "10px" }}>
+      <button onClick={handleEditReview} style={{backgroundColor: "pink", borderRadius: "7px"}}>Save</button>
+      <button onClick={closeModal} style={{ marginLeft: "10px", backgroundColor: "#ccc", borderRadius: "7px" }}>
         Cancel
       </button>
     </div>
