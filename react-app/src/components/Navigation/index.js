@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import SearchList from "./SearchList";
+import "./search.css"
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const listingsObj = useSelector((state) => state.listings.allListings)
+  // console.log("listings: ", listings)
+  const listings = Object.values(listingsObj); //listings array
+  // console.log("listings array: ", listings)
+  const [search, setSearch] = useState("");
   const history = useHistory();
 
   const ProfileClick = () => {
@@ -16,7 +23,18 @@ function Navigation({ isLoaded }) {
     history.push(`/listings/new`);
   };
 
-  
+  const searched = listings.filter(listing => {
+    if (search === "") return null
+    else if (listing.title.toLowerCase().includes(search.toLowerCase())) {
+      return listing
+    }
+  })
+
+  const resetSearch = () => {
+    setSearch("")
+  }
+
+
   return (
     <>
       <div className="navigation-container">
@@ -25,8 +43,9 @@ function Navigation({ isLoaded }) {
         </NavLink>
 
       <div className="search-bar-container">
-        <input className="search-bar" type="text" placeholder="Search - does not work yet" />
-        <button className="search-button" type="submit">Search</button>
+        <input className="search-bar" type="text" placeholder="Search for a restaurant" value={search} onChange={(e) => setSearch(e.target.value)} />
+        {/* <button className="search-button" type="submit">Search</button> */}
+        {search.length > 0 && <SearchList listings={searched} resetSearch={resetSearch}/>}
       </div>
 
         <div className="group-links">

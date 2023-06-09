@@ -1,0 +1,18 @@
+.searchDropdown {
+    position: absolute;
+    background-color: white;
+    z-index: 3;
+    border: 2px solid pink;
+    cursor: pointer;
+    width: 310px;
+    overflow: scroll;
+    max-height: 350px;
+}
+
+.searchDropdown > div {
+    padding: 1px 2px;
+}
+
+.searchDropdown > div:hover {
+    background-color: pink;
+}
