@@ -52,34 +52,35 @@ const EditReviewModal = ({ reviewId }) => {
   };
 
   return (
-    <div>
-      <h2>Edit Review</h2>
+    <div style={{ padding: "20px" }}>
+      <h2 style={{ color: "rgb(251, 160, 165)" }}>Edit Review</h2>
       <form>
-        <label>
-          Rating 1-5:
-          <input
-            type="text"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
-        </label>
+        <label style={{ marginBottom: "7px", color: "#ea6a91"}} >Rating 1-5:</label>
+        <input
+          type="text"
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+        />
+
         {validationErrors.rating && (
           <span className="errors">{validationErrors.rating}</span>
         )}
-        <label>
-          What did you think about this place?
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-        </label>
+        <label style={{ marginBottom: "7px", color: "#ea6a91" }} >What did you think about this place?</label>
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          style={{ marginBottom: "30px" }}
+        />
+
         {validationErrors.comment && (
           <span className="errors">{validationErrors.comment}</span>
         )}
       </form>
       <button onClick={handleEditReview}>Save</button>
-      <button onClick={closeModal}>Cancel</button>
+      <button onClick={closeModal} style={{ marginLeft: "10px" }}>
+        Cancel
+      </button>
     </div>
   );
 };

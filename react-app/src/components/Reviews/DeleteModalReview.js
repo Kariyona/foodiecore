@@ -14,11 +14,11 @@ const DeleteReviewModal = ({ reviewId, listingId }) => {
     }
 
     return (
-        <div>
+        <div style={{ padding: "20px" }}>
             <h3>Confirm Delete</h3>
             <p>Are you sure you want to delete this review?</p>
             <button onClick={handleDeleteSubmit}>Yes</button>
-            <button onClick={closeModal}>Cancel</button>
+            <button onClick={closeModal} style={{ marginLeft: "10px" }}>Cancel</button>
         </div>
     )
 }
