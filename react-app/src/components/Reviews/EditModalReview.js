@@ -52,7 +52,7 @@ const EditReviewModal = ({ reviewId }) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px"}}>
       <h2 style={{ color: "rgb(251, 160, 165)" }}>Edit Review</h2>
       <form>
         <label style={{ marginBottom: "7px", color: "#ea6a91"}} >Rating 1-5:</label>

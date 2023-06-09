@@ -2,11 +2,13 @@
   position: absolute;
   top: 116px;
   right: 40px;
-  border: 1px solid black;
+  border: 1px solid rgb(251, 160, 165);
   padding: 10px;
   padding-left: 10px;
   width: 210px;
   cursor: pointer;
+  border-radius: 8px;
+
 }
 
 .hidden {
