@@ -12,6 +12,7 @@ import CreateListingForm from "./components/Listings/CreateListingForm";
 import UpdateListingForm from "./components/Listings/UpdateListingForm";
 import CreateReviewForm from "./components/Reviews/CreateReviewForm";
 import UserListings from "./components/Listings/UserListings";
+import Splash from "./components/SplashPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,33 +24,34 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
 
       {isLoaded && (
         <Switch>
-          <Route path="/login">
-            <LoginFormPage />
+          <Route path="/" exact={true}>
+            <Splash />
           </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
+
           <Route path="/listings/new">
+          <Navigation />
             <CreateListingForm />
           </Route>
+
           <Route path="/listings" exact={true}>
+            <Navigation isLoaded={isLoaded} />
             <Listing />
+
           </Route>
           <Route path="/listings/:listingId/edit">
+          <Navigation />
             <UpdateListingForm />
           </Route>
           <Route path="/listings/:listingId">
+          <Navigation />
             <ListingDetails />
           </Route>
           <Route path="/profile/:id" exact={true}>
+          <Navigation />
             <UserListings />
-          </Route>
-          <Route path="/" exact={true}>
-            <Listing />
           </Route>
           <Route>
             <h1>404 Not Found</h1>

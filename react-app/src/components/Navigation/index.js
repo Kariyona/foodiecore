@@ -38,7 +38,7 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="navigation-container">
-        <NavLink className="navlink" exact to="/">
+        <NavLink className="navlink" exact to="/listings">
           <img className="logo-image" src="https://i.imgur.com/G8hTFdy.jpg" />
         </NavLink>
 
