@@ -83,3 +83,6 @@
   display: flex;
   gap: 5px;
 }
+.nav-buttons {
+  cursor: pointer;
+}

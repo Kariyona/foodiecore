@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
           <>
             Hi, {user.username}
             <p></p>
-            <button onClick={handleLogout}>Log Out</button>
+            <button onClick={handleLogout} className="cursor-pointer">Log Out</button>
 
           </>
         ) : (

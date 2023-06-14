@@ -22,8 +22,6 @@ def get_listings():
     return listings, 200
 
 # Get listing by listing id
-
-
 @listings_routes.route('/<int:listingId>')
 # @login_required
 def get_listing(listingId):
@@ -35,8 +33,6 @@ def get_listing(listingId):
     return listing.to_dict(), 200
 
 # Create a listing
-
-
 @listings_routes.route('/new', methods=["POST"])
 @login_required
 def create_listing():

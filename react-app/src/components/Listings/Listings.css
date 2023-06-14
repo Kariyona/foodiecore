@@ -220,3 +220,7 @@ body {
 .modal-delete-button {
   font-family: Comfortaa;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

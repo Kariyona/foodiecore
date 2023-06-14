@@ -5,10 +5,10 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import Listings from './components/Listings/index';
-import ListingDetails from './components/Listings/ListingDetails'
+import Listings from "./components/Listings/index";
+import ListingDetails from "./components/Listings/ListingDetails";
 import Listing from "./components/Listings/index";
-import CreateListingForm from "./components/Listings/CreateListingForm"
+import CreateListingForm from "./components/Listings/CreateListingForm";
 import UpdateListingForm from "./components/Listings/UpdateListingForm";
 import CreateReviewForm from "./components/Reviews/CreateReviewForm";
 import UserListings from "./components/Listings/UserListings";
@@ -16,7 +16,7 @@ import UserListings from "./components/Listings/UserListings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const user = useSelector((state) => state.session.user)
+  const user = useSelector((state) => state.session.user);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -27,7 +27,7 @@ function App() {
 
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route path="/login">
             <LoginFormPage />
           </Route>
           <Route path="/signup">
@@ -48,9 +48,11 @@ function App() {
           <Route path="/profile/:id" exact={true}>
             <UserListings />
           </Route>
-
-            <Route path="/" >
+          <Route path="/" exact={true}>
             <Listing />
+          </Route>
+          <Route>
+            <h1>404 Not Found</h1>
           </Route>
         </Switch>
       )}

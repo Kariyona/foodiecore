@@ -32,6 +32,19 @@ const ListingDetails = () => {
     dispatch(getReviewsOfListing(listingId));
   }, [dispatch, listingId]);
 
+  // const listingCheck = async () => {
+  //   const listing = await dispatch(getListingById(listingId))
+  //   console.log("this is listing errors after 36: ", listing.errors)
+  //   if (listing.errors) return "fail"
+  //   else return "pass"
+  // }
+
+  // const check = listingCheck()
+  // console.log("this is cheque: ", check)
+
+
+  // console.log("this is listing: ", listing)
+
   if (!listing) return null;
 
   const handleReviewEdit = (reviewId) => {
@@ -49,7 +62,7 @@ const ListingDetails = () => {
 
   return (
     <>
-      <div className="test-container">
+    <div className="test-container">
         <div className="create-new-review">
           {user && !userHasReview && (
             <div>

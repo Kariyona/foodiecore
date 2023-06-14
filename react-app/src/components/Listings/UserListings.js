@@ -52,7 +52,7 @@ function UserListings() {
               {listing.city}, {listing.state}, {listing.country}
               <div className="edit-delete-listing-button">
                 <button
-                  className="edit-listing-button"
+                  className="edit-listing-button cursor-pointer"
                   onClick={() => handleEditListing(listing.id)}
                 >
                   Edit
@@ -63,7 +63,7 @@ function UserListings() {
                     <DeleteListingModal id={id} listingId={listing.id} />
                   }
                   buttonText="Delete"
-                  className="modal-delete-button"
+                  className="modal-delete-button cursor-pointer"
                 />
               </div>
             </div>
