@@ -81,12 +81,14 @@ export const deleteListingById = (listingId) => async (dispatch) => {
 
 /********************* create a listing *********************/
 export const createNewListing = (listing) => async (dispatch) => {
+    console.log("listing response: ", listing)
     const response = await fetch(`/api/listings/new`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(listing)
+        // headers: {
+        //     "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(listing)
+        body: listing
     });
     if (!response.ok) {
         const errors = await response.json();

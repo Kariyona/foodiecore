@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 class ListingForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -10,4 +12,4 @@ class ListingForm(FlaskForm):
     country = StringField('Country', validators=[DataRequired()])
     hours = StringField('Hours', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    image_url = StringField('Image URL')
+    image_url = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])

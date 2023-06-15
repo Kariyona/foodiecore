@@ -125,7 +125,10 @@ const CreateListingForm = () => {
   const [country, setCountry] = useState("");
   const [hours, setHours] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false); //aws
+  const [imagePreview, setImagePreview] = useState(""); //preview img
 
   const [validationErrors, setValidationErrors] = useState({});
   // const [invalid, setInvalid] = useState(true);
@@ -144,23 +147,27 @@ const CreateListingForm = () => {
       errors.description =
         "Please enter a description with more than 30 characters";
 
-    if (imageUrl?.length === 0) errors.imageUrl = "Image is required";
+    if (!imageUrl) errors.imageUrl = "Image is required";
 
-    if (
-      !imageUrl.endsWith(".png") &&
-      !imageUrl.endsWith(".jpg") &&
-      !imageUrl.endsWith(".jpeg")
-    ) {
-      errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
-    }
+    // if (
+    //   !imageUrl.endsWith(".png") &&
+    //   !imageUrl.endsWith(".jpg") &&
+    //   !imageUrl.endsWith(".jpeg")
+    // ) {
+    //   errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
+    // }
 
+    console.log(title, address, city, state, country, hours, description, imageUrl)
     setValidationErrors(errors);
   }, [title, address, city, state, country, hours, description, imageUrl]);
 
   const handleClick = async (e) => {
+    console.log("inside the function")
     // console.log("handle click submit function running");
     e.preventDefault();
     setIsSubmitted(true);
+    const formData = new FormData();
+    setImageLoading(false);
 
     const errorArr = Object.values(validationErrors);
     // console.log("this is errors array in handle click: ", errorArr);
@@ -169,18 +176,16 @@ const CreateListingForm = () => {
       // console.log("if errors array.lenth === 0 running");
       return;
     } else {
-      const data = {
-        title,
-        address,
-        city,
-        state,
-        country,
-        hours,
-        description,
-        image_url: imageUrl
-      };
-
-      const createdListing = await dispatch(createNewListing(data));
+      formData.append("title", title);
+      formData.append("address", address);
+      formData.append("city", city);
+      formData.append("state", state);
+      formData.append("country", country);
+      formData.append("hours", hours);
+      formData.append("description", description);
+      formData.append("image_url", imageUrl);
+      console.log("before the dispatch")
+      const createdListing = await dispatch(createNewListing(formData));
 
       if (createdListing.id) {
         history.push(`/listings/${createdListing.id}`);
@@ -310,11 +315,14 @@ const CreateListingForm = () => {
           <div className="form-group-container">
             <label htmlFor="imageUrl"></label>
             <h3>Live up your post with a picture</h3>
+            {imagePreview && <img src={imagePreview} id="preview-image"/>}
             <input
-              type="text"
-              value={imageUrl}
-              placeholder="image URL must end in .jpg, .png, .jpeg"
-              onChange={(e) => setImageUrl(e.target.value)}
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setImageUrl(e.target.files[0]);
+                setImagePreview(URL.createObjectURL(e.target.files[0]));
+              }}
             />
             {/* {validationErrors.imageUrl && (
             <span className="errors">{validationErrors.imageUrl}</span>
@@ -324,8 +332,11 @@ const CreateListingForm = () => {
             <span className="errors">{validationErrors.imageUrl}</span>
           )}
         </div>
-          <button className="create-listing-button" type="submit">Create Listing</button>
 
+        {imageLoading && null}
+        <button className="create-listing-button" type="submit">
+          Create Listing
+        </button>
       </form>
     </>
   );

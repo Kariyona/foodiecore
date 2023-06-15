@@ -57,3 +57,14 @@ textarea {
     margin-top: 20px;
     font-family: Comfortaa;
 }
+
+#preview-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.form-group-container {
+    display: flex;
+    flex-direction: column;
+}

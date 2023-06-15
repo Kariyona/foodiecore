@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from ..forms.listing_form import ListingForm
 from ..forms.review_form import ReviewForm
+from .aws_helpers import upload_file_to_s3, get_unique_filename
 
 # Create Blueprint for listings routes
 listings_routes = Blueprint('listings', __name__)
@@ -39,21 +40,29 @@ def create_listing():
     # Creates instance of ListingForm class
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # x = request.get_json()
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
-    # print(x)
+
+    print("yessssssssssss yessssssssssss yessssssssssss", form.validate_on_submit())
+
     if form.validate_on_submit():
         listing = Listing()
+
+        form.populate_obj(listing)
+
+        listing_image = form.data["image_url"]
+        if listing_image:
+            listing_image.filename = get_unique_filename(listing_image.filename)
+            upload = upload_file_to_s3(listing_image)
+
+            if "url" not in upload:
+                return {'errors': [upload]}
+
+            listing_image_url = upload["url"]
+
+            listing.image_url = listing_image_url
+
+
         listing.user_id = current_user.id
         # print(listing)
-        form.populate_obj(listing)
 
         db.session.add(listing)
         db.session.commit()
@@ -62,8 +71,6 @@ def create_listing():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # Delete listing by id
-
-
 @listings_routes.route('/<int:listingId>/delete', methods=['DELETE'])
 @login_required
 def delete_listing(listingId):
