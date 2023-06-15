@@ -28,3 +28,7 @@ input {
   margin: 0 auto;
   margin-top: 20px;
 }
+
+.invalid-errors {
+  color: red
+}
