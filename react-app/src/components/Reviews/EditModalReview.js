@@ -66,8 +66,7 @@ const EditReviewModal = ({ reviewId }) => {
           <span className="errors">{validationErrors.rating}</span>
         )}
         <label style={{ marginBottom: "7px"}} >What did you think about this place?</label>
-        <input
-          type="text"
+        <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           style={{ marginBottom: "30px" }}
