@@ -157,7 +157,6 @@ const CreateListingForm = () => {
     //   errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
     // }
 
-    console.log(title, address, city, state, country, hours, description, imageUrl)
     setValidationErrors(errors);
   }, [title, address, city, state, country, hours, description, imageUrl]);
 
