@@ -40,7 +40,6 @@ import Slider from "react-slick";
 function Listing() {
   const dispatch = useDispatch();
   const storeListings = useSelector((state) => state.listings);
-  console.log("this is state", storeListings);
 
   useEffect(() => {
     dispatch(getAllListings());

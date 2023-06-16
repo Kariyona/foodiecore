@@ -20,10 +20,7 @@ function UserListings() {
   const userListings = useSelector((state) => state.listings.userListings);
   const userReviews = useSelector((state) => state.reviews.userReviews);
 
-  console.log("this is user reviews:", userReviews);
   const { id } = useParams();
-  // console.log("this is the userid:", id)
-  // console.log("this is user Listings: ", userListings)
 
   useEffect(() => {
     dispatch(getListingsByUserId(id));

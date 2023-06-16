@@ -36,7 +36,6 @@ const UpdateListingForm = () => {
     setDescription(listing.description);
     setImageUrl(listing.image_url);
 
-    console.log("Listing in state:", listing);
   }, [listing]);
 
   const validateEditForm = () => {

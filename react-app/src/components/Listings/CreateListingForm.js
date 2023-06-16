@@ -169,7 +169,6 @@ const CreateListingForm = () => {
     const errorArr = Object.values(validationErrors);
 
     if (errorArr.length > 0) {
-      // console.log("if errors array.lenth === 0 running");
       return;
     } else {
       formData.append("title", title);
@@ -180,7 +179,6 @@ const CreateListingForm = () => {
       formData.append("hours", hours);
       formData.append("description", description);
       formData.append("image_url", imageUrl);
-      console.log("before the dispatch")
       const createdListing = await dispatch(createNewListing(formData));
 
       if (createdListing.id) {

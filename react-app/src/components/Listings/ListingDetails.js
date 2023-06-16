@@ -22,7 +22,6 @@ const ListingDetails = () => {
 
   const reviews = useSelector((state) => state.reviews.reviews);
   const ownerOfListing = user && listing && user.id === listing.user_id;
-  // console.log("this is reviews: ", reviews)
 
   const { setModalContent } = useModal();
   const [editReviewId, setEditReviewId] = useState(null);
@@ -34,16 +33,12 @@ const ListingDetails = () => {
 
   // const listingCheck = async () => {
   //   const listing = await dispatch(getListingById(listingId))
-  //   console.log("this is listing errors after 36: ", listing.errors)
   //   if (listing.errors) return "fail"
   //   else return "pass"
   // }
 
   // const check = listingCheck()
-  // console.log("this is cheque: ", check)
 
-
-  // console.log("this is listing: ", listing)
 
   if (!listing) return null;
 
@@ -88,7 +83,6 @@ const ListingDetails = () => {
           </div>
 
           <div className="review-container">
-            {/* {console.log("this is reviews", reviews)} */}
             {Object.values(reviews).length === 0 ? (
               <p>Be the first to post a review!</p>
             ) : (
