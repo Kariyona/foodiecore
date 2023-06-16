@@ -1,0 +1,12 @@
+input[type="radio"] {
+    display: none;
+}
+
+.star-container {
+    display: flex;
+
+}
+
+.star {
+    cursor: pointer;
+}

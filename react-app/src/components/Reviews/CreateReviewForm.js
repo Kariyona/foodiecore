@@ -55,15 +55,15 @@ const CreateReviewForm = ({ listingId }) => {
 
   return (
     <>
-    <StarRating />
     <form onSubmit={handleSubmit}>
-      <label>Rating 1-5:</label>
+      <StarRating />
+      {/* <label>Rating 1-5:</label>
       <input
         type="text"
         value={rating}
         onChange={(e) => setRating(e.target.value)}
       />
-      {isSubmitted && <span className="errors">{validationErrors.rating}</span>}
+      {isSubmitted && <span className="errors">{validationErrors.rating}</span>} */}
 
       <label>What did you think about this place?</label>
       <input
