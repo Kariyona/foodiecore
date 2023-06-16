@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createNewReview } from "../../store/reviews";
 import "./ReviewForm.css";
+import StarRating from "./Stars";
 
 const CreateReviewForm = ({ listingId }) => {
   const dispatch = useDispatch();
@@ -53,6 +54,8 @@ const CreateReviewForm = ({ listingId }) => {
   };
 
   return (
+    <>
+    <StarRating />
     <form onSubmit={handleSubmit}>
       <label>Rating 1-5:</label>
       <input
@@ -75,6 +78,7 @@ const CreateReviewForm = ({ listingId }) => {
         Submit Review
       </button>
     </form>
+    </>
   );
 };
 
