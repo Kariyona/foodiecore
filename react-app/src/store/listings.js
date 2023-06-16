@@ -54,10 +54,8 @@ export const getAllListings = () => async (dispatch) => {
 /********************* retrieve one listing *********************/
 export const getListingById = (listingId) => async (dispatch) => {
     const response = await fetch(`/api/listings/${listingId}`);
-    // console.log("response statement: ", response)
     if (!response.ok) {
         const errors = await response.json();
-        // console.log("errors response: ", errors)
         return errors;
     } else {
         const listing  = await response.json();
@@ -81,7 +79,6 @@ export const deleteListingById = (listingId) => async (dispatch) => {
 
 /********************* create a listing *********************/
 export const createNewListing = (listing) => async (dispatch) => {
-    console.log("listing response: ", listing)
     const response = await fetch(`/api/listings/new`, {
         method: "POST",
         // headers: {
@@ -147,9 +144,7 @@ export default function reducer(state = initialState, action) {
             // return { ...state, allListings: action.payload};
         }
         case GET_LISTING: {
-            // console.log("this is action load", action.payload)
             const newState = { ...state, listing: action.payload };
-            // console.log("this is new state: ", newState)
             return newState
             // return { ...state, listing: action.payload};
         }

@@ -9,9 +9,7 @@ import "./search.css"
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const listingsObj = useSelector((state) => state.listings.allListings)
-  // console.log("listings: ", listings)
   const listings = Object.values(listingsObj); //listings array
-  // console.log("listings array: ", listings)
   const [search, setSearch] = useState("");
   const history = useHistory();
 
