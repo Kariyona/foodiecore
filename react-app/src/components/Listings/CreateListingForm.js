@@ -161,15 +161,12 @@ const CreateListingForm = () => {
   }, [title, address, city, state, country, hours, description, imageUrl]);
 
   const handleClick = async (e) => {
-    console.log("inside the function")
-    // console.log("handle click submit function running");
     e.preventDefault();
     setIsSubmitted(true);
     const formData = new FormData();
     setImageLoading(false);
 
     const errorArr = Object.values(validationErrors);
-    // console.log("this is errors array in handle click: ", errorArr);
 
     if (errorArr.length > 0) {
       // console.log("if errors array.lenth === 0 running");
