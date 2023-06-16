@@ -70,7 +70,9 @@ def sign_up():
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
             city=form.data['city'],
-            state=form.data['state']
+            state=form.data['state'],
+            profile_picture="https://d3ki9tyy5l5ruj.cloudfront.net/obj/3d4665c7cf119dc9dc38232301b18fa68b9bb17c/avatar.svg"
+
         )
         db.session.add(user)
         db.session.commit()

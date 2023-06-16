@@ -168,8 +168,10 @@ body {
   color: grey;
 }
 
-.review-comment {
+#review-comment {
   margin-left: 15px;
+  word-wrap: break-word;
+
 }
 
 .create-new-review {
@@ -223,4 +225,8 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.reviews-container > p{
+  word-wrap: break-word;
 }
