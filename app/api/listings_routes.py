@@ -14,11 +14,9 @@ listings_routes = Blueprint('listings', __name__)
 # @login_required
 def get_listings():
     all_listings = Listing.query.all()
-    # print(listings)
     listings = {}
     for listing in all_listings:
         obj = listing.to_dict()
-        # print(obj)
         listings[obj["id"]] = obj
     return listings, 200
 
@@ -41,7 +39,6 @@ def create_listing():
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print("yessssssssssss yessssssssssss yessssssssssss", form.validate_on_submit())
 
     if form.validate_on_submit():
         listing = Listing()
@@ -62,7 +59,6 @@ def create_listing():
 
 
         listing.user_id = current_user.id
-        # print(listing)
 
         db.session.add(listing)
         db.session.commit()
@@ -93,7 +89,6 @@ def delete_listing(listingId):
 @listings_routes.route('/<int:listingId>/edit', methods=['PUT'])
 @login_required
 def update_listing(listingId):
-    print("This means I recieved the PUT requested:", listingId)
     listing = Listing.query.get(listingId)
 
     if not listing:
@@ -107,7 +102,6 @@ def update_listing(listingId):
         form.populate_obj(listing)
 
         db.session.commit()
-        print("Listing is successful:", listing.to_dict())
         return listing.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -155,7 +149,6 @@ def create_review(listingId):
         review.user = User.query.get(review.user_id)
 
         form.populate_obj(review)
-        print("is form populating?", review.to_dict())
 
         db.session.add(review)
         db.session.commit()
