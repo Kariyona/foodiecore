@@ -227,6 +227,22 @@ body {
   cursor: pointer;
 }
 
+.reviews-container {
+  width: 438px;
+}
+
 .reviews-container > p{
   word-wrap: break-word;
+}
+
+#review-comment {
+  width: 100%;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 450px;
+
 }

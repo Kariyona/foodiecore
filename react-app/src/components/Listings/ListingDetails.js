@@ -111,7 +111,7 @@ const ListingDetails = () => {
 
                   <div className="reviews-container"><p id="review-comment">{review.comment}</p>
                   {user && review.user_id === user.id && (
-                    <>
+                    <div className="edit-delete-buttons">
                       <button onClick={() => handleReviewEdit(review.id)}>
                         Edit Review
                       </button>
@@ -125,7 +125,7 @@ const ListingDetails = () => {
                         }
                         buttonText="Delete"
                       />
-                    </>
+                    </div>
                   )}</div>
                 </div>
               ))
