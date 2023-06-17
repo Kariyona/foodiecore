@@ -12,6 +12,7 @@ import { useModal } from "../../context/Modal";
 import EditReviewModal from "../Reviews/EditModalReview";
 import DeleteReviewModal from "../Reviews/DeleteModalReview";
 import OpenModalButton from "../OpenModalButton/index";
+import { FaStar } from "react-icons/fa";
 
 const ListingDetails = () => {
   let dispatch = useDispatch();
@@ -39,7 +40,6 @@ const ListingDetails = () => {
 
   // const check = listingCheck()
 
-
   if (!listing) return null;
 
   const handleReviewEdit = (reviewId) => {
@@ -57,7 +57,7 @@ const ListingDetails = () => {
 
   return (
     <>
-    <div className="test-container">
+      <div className="test-container">
         <div className="create-new-review">
           {user && !userHasReview && (
             <div>
@@ -98,29 +98,34 @@ const ListingDetails = () => {
                           {review.user?.city}, {review.user?.state}
                         </span>{" "}
                         <br />
-                        rating: {review.rating}
+                        {/* rating: {review.rating} */}
+                        {[...Array(5)].map((star, index) => {
+                          return <FaStar key={index} color={index < review.rating ? "gold" : "grey"}/>
+                        })}
                       </p>
                     </div>
                   </div>
 
-                  <div className="reviews-container"><p id="review-comment">{review.comment}</p>
-                  {user && review.user_id === user.id && (
-                    <div className="edit-delete-buttons">
-                      <button onClick={() => handleReviewEdit(review.id)}>
-                        Edit Review
-                      </button>
+                  <div className="reviews-container">
+                    <p id="review-comment">{review.comment}</p>
+                    {user && review.user_id === user.id && (
+                      <div className="edit-delete-buttons">
+                        <button onClick={() => handleReviewEdit(review.id)}>
+                          Edit Review
+                        </button>
 
-                      <OpenModalButton
-                        modalComponent={
-                          <DeleteReviewModal
-                            reviewId={review.id}
-                            listingId={listingId}
-                          />
-                        }
-                        buttonText="Delete"
-                      />
-                    </div>
-                  )}</div>
+                        <OpenModalButton
+                          modalComponent={
+                            <DeleteReviewModal
+                              reviewId={review.id}
+                              listingId={listingId}
+                            />
+                          }
+                          buttonText="Delete"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))
             )}
