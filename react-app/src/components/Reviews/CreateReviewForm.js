@@ -47,7 +47,7 @@ const CreateReviewForm = ({ listingId }) => {
     setIsSubmitted(true);
 
     const errors = {};
-    if (rating > 5 || rating < 1) errors.rating = "Rating must be between 1-5";
+    // if (rating > 5 || rating < 1) errors.rating = "Rating must be between 1-5";
     if (comment.length < 25)
       errors.comment = "Review must be at least 25 characters";
     setValidationErrors(errors);
@@ -55,29 +55,35 @@ const CreateReviewForm = ({ listingId }) => {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <StarRating />
-      {/* <label>Rating 1-5:</label>
-      <input
+      <form onSubmit={handleSubmit}>
+        <label>Rating:</label>
+        <StarRating rating={rating} setRating={setRating} />
+        {/* <input
         type="text"
         value={rating}
         onChange={(e) => setRating(e.target.value)}
-      />
-      {isSubmitted && <span className="errors">{validationErrors.rating}</span>} */}
+      /> */}
+        {isSubmitted && (
+          <span className="errors">{validationErrors.rating}</span>
+        )}
 
-      <label>What did you think about this place?</label>
-      <input
-        type="text"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      {isSubmitted && (
-        <span className="errors">{validationErrors.comment}</span>
-      )}
-      <button className="submit-review-button" type="submit">
-        Submit Review
-      </button>
-    </form>
+        <label>What did you think about this place?</label>
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        {isSubmitted && (
+          <span className="errors">{validationErrors.comment}</span>
+        )}
+        <button
+          className="submit-review-button"
+          type="submit"
+          disabled={!rating}
+        >
+          Submit Review
+        </button>
+      </form>
     </>
   );
 };

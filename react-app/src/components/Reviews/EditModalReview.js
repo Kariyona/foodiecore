@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editReview, getReviewById } from "../../store/reviews";
+import StarRating from "./Stars";
 
 const EditReviewModal = ({ reviewId }) => {
   const dispatch = useDispatch();
@@ -56,11 +57,12 @@ const EditReviewModal = ({ reviewId }) => {
       <h2 style={{ color: "rgb(251, 160, 165)" }}>Edit Review</h2>
       <form>
         <label style={{ marginBottom: "7px"}} >Rating 1-5:</label>
-        <input
+        <StarRating rating={rating} setRating={setRating} />
+        {/* <input
           type="text"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-        />
+        /> */}
 
         {validationErrors.rating && (
           <span className="errors">{validationErrors.rating}</span>
