@@ -56,7 +56,7 @@ const CreateReviewForm = ({ listingId }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>Rating:</label>
+        <label>How many stars would you rate this restaurant?</label>
         <StarRating rating={rating} setRating={setRating} />
         {/* <input
         type="text"
