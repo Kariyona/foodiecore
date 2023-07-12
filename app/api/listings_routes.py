@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from ..forms.listing_form import ListingForm
 from ..forms.review_form import ReviewForm
-from .aws_helpers import upload_file_to_s3, get_unique_filename
+from .aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 # Create Blueprint for listings routes
 listings_routes = Blueprint('listings', __name__)
@@ -99,7 +99,23 @@ def update_listing(listingId):
     form = ListingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        form.populate_obj(listing)
+
+        listing_image = form.data["image_url"]
+
+        if listing_image:
+            remove_file_from_s3(listing.image_url)
+            listing_image.filename = get_unique_filename(listing_image.filename)
+            upload = upload_file_to_s3(listing_image)
+
+            if "url" not in upload:
+                return {'errors': [upload]}
+
+            listing_image_url = upload["url"]
+
+            listing.image_url = listing_image_url
+
+
+        listing.user_id = current_user.id
 
         db.session.commit()
         return listing.to_dict()

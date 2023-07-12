@@ -18,7 +18,10 @@ const UpdateListingForm = () => {
   const [country, setCountry] = useState("");
   const [hours, setHours] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false); //aws
+  const [imagePreview, setImagePreview] = useState(""); //preview img
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -35,7 +38,7 @@ const UpdateListingForm = () => {
     setHours(listing.hours);
     setDescription(listing.description);
     setImageUrl(listing.image_url);
-
+    setImagePreview(listing.image_url)
   }, [listing]);
 
   const validateEditForm = () => {
@@ -53,43 +56,32 @@ const UpdateListingForm = () => {
 
     if (imageUrl.length === 0) errors.imageUrl = "Image is required";
 
-    if (
-      !imageUrl.endsWith(".png") &&
-      !imageUrl.endsWith(".jpg") &&
-      !imageUrl.endsWith(".jpeg")
-    ) {
-      errors.imageUrl = "Image URL must end in .png, .jpg, .jpeg";
-    }
-
     setValidationErrors(errors);
     return Object.values(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
+    const formData = new FormData();
+    setImageLoading(false);
 
     const isFormDataValid = validateEditForm();
 
     if (!isFormDataValid) {
       return;
     }
+    formData.append("id", listingId);
+    formData.append("title", title);
+    formData.append("address", address);
+    formData.append("city", city);
+    formData.append("state", state);
+    formData.append("country", country);
+    formData.append("hours", hours);
+    formData.append("description", description);
+    formData.append("image_url", imageUrl);
 
-    const updatedListing = await dispatch(
-      editListing(
-        {
-          id: listingId,
-          title,
-          address,
-          city,
-          state,
-          country,
-          hours,
-          description,
-          image_url: imageUrl,
-        },
-        listingId
-      )
-    );
+    const updatedListing = await dispatch(editListing(formData, listingId));
 
     if (!updatedListing.errors) {
       history.push(`/listings/${listingId}`);
@@ -178,17 +170,33 @@ const UpdateListingForm = () => {
           )}
         </div>
         <div className="form-group-container">
-          <label htmlFor="imageUrl"></label>
-          <h3>Live up your post with a picture</h3>
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-          {validationErrors.imageUrl && (
+          {/* <h3>Liven up your listing with photos</h3>
+          <p className="bio-margin">
+            Submit a link to at least one photo to publish your listing. This
+            helps attract viewers to your listing.
+          </p> */}
+          <div className="form-group-container">
+            <label htmlFor="imageUrl"></label>
+            <h3>Live up your post with a picture</h3>
+            {imagePreview && <img src={imagePreview} id="preview-image"/>}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setImageUrl(e.target.files[0]);
+                setImagePreview(URL.createObjectURL(e.target.files[0]));
+              }}
+            />
+            {/* {validationErrors.imageUrl && (
+            <span className="errors">{validationErrors.imageUrl}</span>
+          )} */}
+          </div>
+          {isSubmitted && (
             <span className="errors">{validationErrors.imageUrl}</span>
           )}
         </div>
+
+        {imageLoading && null}
         <button className="update-listing-button" type="submit">
           Update Listing
         </button>

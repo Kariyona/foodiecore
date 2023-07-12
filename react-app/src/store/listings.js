@@ -101,10 +101,7 @@ export const createNewListing = (listing) => async (dispatch) => {
 export const editListing = (listingData, listingId) => async(dispatch) => {
     const response = await fetch(`/api/listings/${listingId}/edit`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(listingData)
+        body: listingData
     });
     if (!response.ok) {
         const errors = await response.json()
